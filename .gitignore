@@ -1,3 +1,7 @@
 /client/node_modules
 /server/node_modules
+<<<<<<< HEAD
 /server/.env 
+=======
+/server/.env
+>>>>>>> ca2a3a56f65c8754a2bda47779e930cc925895a3
