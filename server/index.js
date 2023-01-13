@@ -16,7 +16,12 @@ mongoose.connect(
   .then(()=>console.log('connected'))
   .catch(e=>console.log(e));
 
-  app.use("/user",userRoute);
+//middleware
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("common"));
+
+app.use("/user",userRoute);
 
 //app.listen(port,function)
 app.listen(8800,()=>{
