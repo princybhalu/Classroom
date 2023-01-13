@@ -1,9 +1,47 @@
 const mongoose = require("mongoose");
 
+// Id : unique
+//     DOB : Date (string) 
+//     Role : 
+//     Name : 
+//     Email: 
+//     Batch: 
+//     Department :
+//     Classid ;
+//    Active status : 
+
 const UserSchema = new mongoose.Schema({
+    dob:{
+        type: String,
+        required: true,
+    },
     name:{
         type: String,
-        require: true
+        require: true,
+    },
+    role:{
+        type: String,
+        require: true,
+    },
+    email:{
+        type: String,
+        require: true,
+    },
+    batch:{
+        type: Number,
+        required: true,
+    },
+    department:{
+        type: String,
+        required: true,
+    },
+    classid:{
+        type: Array,
+        default: []
+    },
+    activestatus:{
+        type: Boolean,
+        default: false,
     }
 });
 
