@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router";
 
 
 const RoleSelectItemList = [
@@ -22,6 +23,8 @@ const DepartmentSelectItemList = [
 function Registration() {
 
     const today = new Date();
+
+    const navigate = useNavigate();
 
     // form controller
     const formik = useFormik({
@@ -87,6 +90,7 @@ function Registration() {
                 if (response.status == 200) {
                     toast.success("Registered Successfully");
                     console.log(response.data);
+                    navigate('/');
                 }
 
             } catch (err) {
