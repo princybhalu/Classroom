@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 //     DOB : Date (string) 
 //     Role : 
 //     Name : 
+//     userId
 //     Email: 
 //     Batch: 
 //     Department :
@@ -11,6 +12,10 @@ const mongoose = require("mongoose");
 //    Active status : 
 
 const UserSchema = new mongoose.Schema({
+    userId:{
+        type: String,
+        require: true,
+    },
     dob:{
         type: String,
         required: true,
