@@ -1,24 +1,11 @@
-import './App.css';
 import Registration  from './auth/registration/registration';
+import { toast, ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       <Registration />
+      <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={200000} />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const RoleSelectItemList = [
     'Student',
@@ -25,7 +29,7 @@ function Registration() {
         // intial values
         initialValues: {
             email: '',
-            username: '',
+            userId: '',
             firstName: '',
             lastName: '',
             dateofbirth: '',
@@ -36,6 +40,7 @@ function Registration() {
 
         // To check enter value is vaild or not 
         validationSchema: Yup.object({
+            userId: Yup.string().max(255).required('User Id  is required'),
             email: Yup
                 .string()
                 .email('Must be a valid email')
@@ -62,33 +67,33 @@ function Registration() {
         // for when click on submit button  
         onSubmit: async (values) => {
 
-            console.log(values);
-            console.log("addes sucessfullly");
-            // try {
-            //     // call to backend url
-            //     const response = await axios.post('/auth/signup', requestuser);
+            //Request Body To Pass Api
+            const RequestBody = {
+                userId: values.userId,
+                dob: values.dateofbirth.toString(),
+                role: values.role,
+                name: values.firstName + " " + values.lastName,
+                email: values.email,
+                batch: parseInt(values.batch),
+                department: values.department,
+                activestatus: true,
+            }
 
-            //     //  status of respose 
-            //     console.log(response.data.success);
-            //     if (response.data.success == true) {
-            //         toast.success("Registered Successfully");
-            //         console.log(response.data.userId);
-            //         Router
-            //             .push('/auth/login')
-            //             .catch(console.error);
-            //     }
-            //     if (response.data.success == false) {
-            //         // let responseMsg = response.data.message ;
-            //         toast.error("Already Registered with Email or Phone Number");
-            //         Router
-            //             .push('/auth/register')
-            //             .catch(console.error);
-            //     }
+            try {
+                // call to backend url
+                const response = await axios.post('/user/register', RequestBody);
 
-            // } catch (err) {
-            //     toast.error(err);
-            //     console.log(err);
-            // }
+                //  status of respose 
+                if (response.status == 200) {
+                    toast.success("Registered Successfully");
+                    console.log(response.data);
+                }
+
+            } catch (err) {
+
+                toast.error(err.message);
+                console.log(err.message);
+            }
         }
     });
 
@@ -104,6 +109,23 @@ function Registration() {
                         </Box>
 
                         <Grid container spacing={2}>
+
+                            <Grid item xs={12} md={4} >
+                                {/* User Id */}
+                                <TextField
+                                    error={Boolean(formik.touched.userId && formik.errors.userId)}
+                                    fullWidth
+                                    helperText={formik.touched.userId && formik.errors.userId}
+                                    label="User Id"
+                                    margin="normal"
+                                    name="userId"
+                                    onBlur={formik.handleBlur}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.userId}
+                                    variant="outlined"
+                                />
+                            </Grid>
+
                             <Grid item xs={12} md={4} >
                                 {/* First Name */}
                                 <TextField
