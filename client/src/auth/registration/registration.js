@@ -7,6 +7,14 @@ const RoleSelectItemList = [
     'Teacher'
 ];
 
+const DepartmentSelectItemList = [
+    "Computer Engineering",
+    "Information Technology",
+    "Electronics and Communication Engineering",
+    "Chemical Engineering",
+    "Mechanical Engineering "
+];
+
 function Registration() {
 
     const today = new Date();
@@ -198,11 +206,15 @@ function Registration() {
                                         // input={<OutlinedInput label="Tag" />}
                                         onChange={formik.handleChange}
                                     >
-                                        <MenuItem value={"Computer Engineering"}>Computer Engineering</MenuItem>
-                                        <MenuItem value={"Information Technology"}>Information Technology</MenuItem>
-                                        <MenuItem value={"Electronics and Communication Engineering"}>Electronics and Communication Engineering</MenuItem>
-                                        <MenuItem value={"Chemical Engineering"}>Chemical Engineering</MenuItem>
-                                        <MenuItem value={"Mechanical Engineering "}>Mechanical Engineering </MenuItem>
+                                        {DepartmentSelectItemList.map((name) => (
+                                            <MenuItem
+                                                key={name}
+                                                value={name}
+
+                                            >
+                                                {name}
+                                            </MenuItem>
+                                        ))}
                                     </Select>
                                     <FormHelperText sx={{ color: "#D14343" }}>{formik.touched.department && formik.errors.department}</FormHelperText>
                                 </FormControl>
@@ -225,8 +237,6 @@ function Registration() {
                                         // input={<OutlinedInput label="Tag" />}
                                         onChange={formik.handleChange}
                                     >
-                                        {/* <MenuItem value={"Student"}>Student</MenuItem>
-                                        <MenuItem value={"Teacher"}>Teacher</MenuItem> */}
                                         {RoleSelectItemList.map((name) => (
                                             <MenuItem
                                                 key={name}
