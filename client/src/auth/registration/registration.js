@@ -1,5 +1,6 @@
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
 import { useFormik } from 'formik';
+import axios from 'axios';
 import * as Yup from 'yup';
 
 const RoleSelectItemList = [
@@ -53,32 +54,32 @@ function Registration() {
 
         // for when click on submit button  
         onSubmit: async (values) => {
-
-            console.log(values);
+            +
+                        console.log(values.department);
             console.log("addes sucessfullly");
             // try {
             //     // call to backend url
-            //     const response = await axios.post('/auth/signup', requestuser);
+            //     const response = await axios.post('/user/register', values);
 
             //     //  status of respose 
             //     console.log(response.data.success);
             //     if (response.data.success == true) {
-            //         toast.success("Registered Successfully");
+            //        // toast.success("Registered Successfully");
             //         console.log(response.data.userId);
-            //         Router
-            //             .push('/auth/login')
-            //             .catch(console.error);
+            //         // Router
+            //         //     .push('/auth/login')
+            //         //     .catch(console.error);
             //     }
             //     if (response.data.success == false) {
             //         // let responseMsg = response.data.message ;
-            //         toast.error("Already Registered with Email or Phone Number");
-            //         Router
-            //             .push('/auth/register')
-            //             .catch(console.error);
+            //         //toast.error("Already Registered with Email or Phone Number");
+            //         // Router
+            //         //     .push('/auth/register')
+            //         //     .catch(console.error);
             //     }
 
             // } catch (err) {
-            //     toast.error(err);
+            //     //toast.error(err);
             //     console.log(err);
             // }
         }
@@ -247,12 +248,8 @@ function Registration() {
                                     Sign Up Now
                                 </Button>
                             </Box>
-
-
-
                         </Grid>
                     </form>
-
                 </Container>
             </Box>
         </>
