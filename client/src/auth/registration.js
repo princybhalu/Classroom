@@ -1,5 +1,6 @@
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
 import { useFormik } from 'formik';
+import axios from 'axios';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -69,6 +70,7 @@ function Registration() {
 
         // for when click on submit button  
         onSubmit: async (values) => {
+<<<<<<< HEAD:client/src/auth/registration.js
 
             //Request Body To Pass Api
             const RequestBody = {
@@ -98,6 +100,36 @@ function Registration() {
                 toast.error(err.message);
                 console.log(err.message);
             }
+=======
+            +
+                        console.log(values.department);
+            console.log("addes sucessfullly");
+            // try {
+            //     // call to backend url
+            //     const response = await axios.post('/user/register', values);
+
+            //     //  status of respose 
+            //     console.log(response.data.success);
+            //     if (response.data.success == true) {
+            //        // toast.success("Registered Successfully");
+            //         console.log(response.data.userId);
+            //         // Router
+            //         //     .push('/auth/login')
+            //         //     .catch(console.error);
+            //     }
+            //     if (response.data.success == false) {
+            //         // let responseMsg = response.data.message ;
+            //         //toast.error("Already Registered with Email or Phone Number");
+            //         // Router
+            //         //     .push('/auth/register')
+            //         //     .catch(console.error);
+            //     }
+
+            // } catch (err) {
+            //     //toast.error(err);
+            //     console.log(err);
+            // }
+>>>>>>> 6f1b9e54844c04f8729cdf1519ba01dc9e0fd767:client/src/auth/registration/registration.js
         }
     });
 
@@ -283,12 +315,8 @@ function Registration() {
                                     Sign Up Now
                                 </Button>
                             </Box>
-
-
-
                         </Grid>
                     </form>
-
                 </Container>
             </Box>
         </>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Registration  from './auth/registration';
 import { toast, ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
@@ -5,6 +6,10 @@ import Login from './auth/login';
 import  Dashboard from './dashboard';
 import UpdateUser from './auth/updateUser';
 import { useSelector } from 'react-redux'
+=======
+
+import Registration  from './auth/registration/registration';
+>>>>>>> 6f1b9e54844c04f8729cdf1519ba01dc9e0fd767
 
 function App() {
 
@@ -13,6 +18,7 @@ function App() {
   console.log(isLoggedIn);
 
   return (
+<<<<<<< HEAD
     <Router>
       <div className="App">
         <Routes>
@@ -29,6 +35,11 @@ function App() {
         <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={200000} />
       </div>
     </Router>
+=======
+    // <div className="App">
+      <Registration />
+    // </div>
+>>>>>>> 6f1b9e54844c04f8729cdf1519ba01dc9e0fd767
   );
 }
 
