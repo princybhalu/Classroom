@@ -1,14 +1,14 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Grid,  Typography } from '@mui/material';
+import { Box, Button, Container,  Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from "react-router";
 import { useDispatch } from 'react-redux';
-import { signIn } from '../../redux/slices/userSlice';
+import { signIn } from '../redux/slices/userSlice';
 
 
 const login = () => {
@@ -50,16 +50,16 @@ const login = () => {
 
                 // status of response
                 console.log(response);
-                if (response.status == 200) {
+                if (response.status === 200) {
                     toast.success("Successfullly Login.");
                     dispatch(signIn(response.data));
                     navigate('/');
                 }
 
             } catch (err) {
-                if (err.status == 400) {
+                if (err.status === 400) {
                     toast.error("Wrong Password");
-                }else if(err.status == 404){
+                }else if(err.status === 404){
                     toast.error("You are not Authorize")
                 }
                 else{
