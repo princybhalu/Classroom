@@ -83,10 +83,9 @@ const login = () => {
                             helperText={formik.touched.userId && formik.errors.userId}
                             label="User Id"
                             margin="normal"
-                            name="userid"
+                            name="userId"
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
-                            type="text"
                             value={formik.values.userId}
                             variant="outlined"
                         />
