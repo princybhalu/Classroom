@@ -3,18 +3,21 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Grid,  Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
-// import InputBase from '@mui/material/FilledInput/FilledInput' ;
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from "react-router";
-// import {useGetPokemonByNameQuery } from  '../../services/basicurl';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/slices/userSlice';
 
 
 const login = () => {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const dispatch = useDispatch();
     
 
     // form controller
@@ -49,6 +52,7 @@ const login = () => {
                 console.log(response);
                 if (response.status == 200) {
                     toast.success("Successfullly Login.");
+                    dispatch(signIn(response.data));
                     navigate('/');
                 }
 
