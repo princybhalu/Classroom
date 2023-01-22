@@ -6,10 +6,6 @@ const morgan = require('morgan');
 const userRoute = require('./routes/user');
 const ClassroomRoute = require('./routes/classroom');
 const loginRoute = require('./routes/login');
-<<<<<<< HEAD
-
-=======
->>>>>>> 6f1b9e54844c04f8729cdf1519ba01dc9e0fd767
 
 //creating an express application which name is app
 const app = express();
