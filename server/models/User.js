@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     userId:{
         type: String,
         require: true,
+        unique: true
     },
     dob:{
         type: String,
@@ -31,6 +32,7 @@ const UserSchema = new mongoose.Schema({
     email:{
         type: String,
         require: true,
+
     },
     batch:{
         type: Number,
