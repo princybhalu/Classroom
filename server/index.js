@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const userRoute = require('./routes/user');
 const ClassroomRoute = require('./routes/classroom');
+const Assignment = require('./routes/assignment');
+const Material = require('./routes/material');
 
 //creating an express application which name is app
 const app = express();
@@ -24,6 +26,8 @@ app.use(morgan("common"));
 
 app.use("/user",userRoute);
 app.use("/classroom",ClassroomRoute);
+app.use("/assignment",Assignment);
+app.use("/material",Material);
 
 //app.listen(port,function)
 app.listen(8800,()=>{
