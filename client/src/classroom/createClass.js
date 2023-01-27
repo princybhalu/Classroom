@@ -14,7 +14,7 @@ function CreateClass(){
 
     const user = useSelector(state => state.user);
 
-    const classId = new Array();
+    
 
     //from controller
     const formik = useFormik({
@@ -63,17 +63,18 @@ function CreateClass(){
                 if (response.status == 200) {
                     toast.success("ClassRoom Created Successfully");
                     console.log(response.data);
-                    // navigate('/');
+                    console.log(response.data._id)
+                    const RequestBody1 = {
+                        userId : user.userId,
+                        classid : response.data._id
+                    }
+                    console.log(user._id)
+                    const updateUser = await axios.put('/user/createOrJoinClass/'+user._id,RequestBody1);
+                    navigate('/');
                 }
 
-                classId.push(response.data._id)
-                console.log(response.data._id)
-                const RequestBody1 = {
-                    userId : user.userId,
-                    classid : classId
-                }
-                console.log(user._id)
-               const updateUser = await axios.put('/user/createOrJoinClass/'+user._id,RequestBody1);
+                
+                
 
             }catch(err){
                 toast.error(err.message);

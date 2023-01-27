@@ -7,6 +7,7 @@ import Dashboard from './dashboard';
 import UpdateUser from './auth/updateUser';
 import UpdateClass from './classroom/updateClass';
 import { useSelector } from 'react-redux'
+import ViewClass from './classroom/viewClass';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/classroom'>
             <Route exact path='/classroom/createClass' element={ < CreateClass /> }></Route>
             <Route exact path='/classroom/updateClass' element={ < UpdateClass /> }></Route>
+            <Route exact path='/classroom/ViewClass' element={ < ViewClass /> }></Route>
           </Route>
 
         </Routes>

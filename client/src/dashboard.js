@@ -15,6 +15,8 @@ const dashboard = () => {
       <Link to='/classroom/createClass'>Create Classroom</Link>
       <br />
       <Link to='/classroom/updateClass'>Update Classroom</Link>
+      <br />
+      <Link to='/classroom/viewClass'>View Classes</Link>
     </>
 
   )
