@@ -1,11 +1,7 @@
 import React from 'react';
-import {Link ,hashHistory} from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {Link} from 'react-router-dom';
 
-function dashboard () {
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const user = useSelector(state => state.user);
+const dashboard = () => {
   return (
     <>
       <div>dashboard</div>
@@ -14,9 +10,7 @@ function dashboard () {
       <br />
       <Link to='/auth/register'>Add User</Link>
       <br />
-      <Link to={'/auth/update/'+ user._id } >Upadate User</Link>
-      <br />
-      <Link to='/auth/allUser'>All User</Link>
+      <Link to='/auth/updateUser'>Upadate User</Link>
     </>
 
   )

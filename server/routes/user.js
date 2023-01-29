@@ -29,7 +29,6 @@ router.post("/register", async(req,res)=>{
         const saveUser = await newUser.save();
         res.status(200).json(saveUser);
     }catch(err){
-        console.log(err);
         res.status(500).json(err);
     }
 });
@@ -72,22 +71,20 @@ router.get("/getOneUser/:id",async(req,res)=>{
     try{
         const getOneUser  = await User.findById(req.params.id);
         res.status(200).json(getOneUser);
+
     }catch(err){
-        console.log(err);
         res.status(500).json(err);
     }
 });
 
-// get all users
-router.get("/getAllUser",async(req, res)=>{
-    try{
-        const users = await User.find();
-        res.status(200).json(users);
-    }catch(err){
-        console.log(err);
-        res.status(500).json(err);
-    }
-})
+//get all users
+// router.get("/getAllUser",async(req, res)=>{
+//     try{
+        
+//     }catch(err){
+//         res.status(500).json(err);
+//     }
+// })
 
 
 module.exports = router;
