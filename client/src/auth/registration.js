@@ -5,20 +5,10 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router";
+import {DepartmentSelectItemList } from '../model/DepartmentSelectItemList';
+import {RoleSelectItemList} from '../model/RoleSelectItemList';
 
 
-const RoleSelectItemList = [
-    'Student',
-    'Teacher'
-];
-
-const DepartmentSelectItemList = [
-    "Computer Engineering",
-    "Information Technology",
-    "Electronics and Communication Engineering",
-    "Chemical Engineering",
-    "Mechanical Engineering "
-];
 
 function Registration() {
 
@@ -87,7 +77,7 @@ function Registration() {
                 const response = await axios.post('/user/register', RequestBody);
 
                 //  status of respose 
-                if (response.status == 200) {
+                if (response.status === 200) {
                     toast.success("Registered Successfully");
                     console.log(response.data);
                     navigate('/');
