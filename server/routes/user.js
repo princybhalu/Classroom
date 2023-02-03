@@ -29,6 +29,7 @@ router.post("/register", async(req,res)=>{
         const saveUser = await newUser.save();
         res.status(200).json(saveUser);
     }catch(err){
+        console.log(err);
         res.status(500).json(err);
     }
 });
@@ -71,12 +72,13 @@ router.get("/getOneUser/:id",async(req,res)=>{
     try{
         const getOneUser  = await User.findById(req.params.id);
         res.status(200).json(getOneUser);
-
     }catch(err){
+        console.log(err);
         res.status(500).json(err);
     }
 });
 
+<<<<<<< HEAD
 //update user when create class or join class
 router.put("/createOrJoinClass/:id",async(req,res)=>{
     try{
@@ -103,6 +105,18 @@ router.put("/createOrJoinClass/:id",async(req,res)=>{
 //         res.status(500).json(err);
 //     }
 // })
+=======
+// get all users
+router.get("/getAllUser",async(req, res)=>{
+    try{
+        const users = await User.find();
+        res.status(200).json(users);
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+>>>>>>> main
 
 
 module.exports = router;

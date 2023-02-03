@@ -4,7 +4,11 @@ const mongoose = require("mongoose")
 const ClassSchema = new mongoose.Schema({
     userId:{
         type: String,
+<<<<<<< HEAD
         // require: true,
+=======
+        require: true
+>>>>>>> main
     },
     Classcode:{
         type: String,
