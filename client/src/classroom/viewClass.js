@@ -10,30 +10,33 @@ function ViewClass(){
 
     const [classRoom,SetClassRoom] = useState([]);
 
-    const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user); 
 
-    // console.log(user);
-
-    // const classes = useMemo(()=>GetAllClassroomApiCall(user).then((result)=>{
-    //     SetClassRoom(result.data)
-    //     console.log(classRoom)
-    // }),[])
-  
-
-    useEffect(()=>{ 
-        GetAllClassroomApiCall(user).then(async(result) => {
-            await SetClassRoom([...classRoom,result])
-            console.log(result)
+    // useEffect(()=>{ 
+        GetAllClassroomApiCall(user).then((result) => {
+            SetClassRoom(result)
+            
             console.log(classRoom);
+            console.log(result)
+           
         });
         // const res = axios.get('/classroom/getAllClass/'+user._id);
         
         
-    },[])  
+    // },[])  
     
     return(
         <>
             List Of Class
+            <div>{!classRoom && 'loading...'}</div>
+            <table>
+            {
+                classRoom && <>
+                    <tr>{classRoom.map((arr)=>(<h1>{arr.classid}</h1>))}</tr>
+                </>
+                
+            }
+            </table>
         </>
     )
 }
