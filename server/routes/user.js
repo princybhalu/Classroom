@@ -78,7 +78,6 @@ router.get("/getOneUser/:id",async(req,res)=>{
     }
 });
 
-<<<<<<< HEAD
 //update user when create class or join class
 router.put("/createOrJoinClass/:id",async(req,res)=>{
     try{
@@ -105,7 +104,6 @@ router.put("/createOrJoinClass/:id",async(req,res)=>{
 //         res.status(500).json(err);
 //     }
 // })
-=======
 // get all users
 router.get("/getAllUser",async(req, res)=>{
     try{
@@ -116,7 +114,6 @@ router.get("/getAllUser",async(req, res)=>{
         res.status(500).json(err);
     }
 })
->>>>>>> main
 
 
 module.exports = router;

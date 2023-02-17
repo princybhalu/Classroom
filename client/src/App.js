@@ -5,14 +5,10 @@ import Login from './auth/login';
 import CreateClass from './classroom/createClass';
 import Dashboard from './dashboard';
 import UpdateUser from './auth/updateUser';
-<<<<<<< HEAD
 import UpdateClass from './classroom/updateClass';
 import { useSelector } from 'react-redux'
 import ViewClass from './classroom/viewClass';
-=======
-import { useSelector } from 'react-redux';
 import AllUser from './auth/allUser';
->>>>>>> main
 
 function App() {
 
