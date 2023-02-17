@@ -17,6 +17,16 @@ function dashboard () {
       <Link to={'/auth/update/'+ user._id } >Upadate User</Link>
       <br />
       <Link to='/auth/allUser'>All User</Link>
+      <br />
+      <br />
+      <Link to='/classroom/createClass'>Create Classroom</Link>
+      <br />
+      <Link to='/classroom/updateClass'>Update Classroom</Link>
+      <br />
+      <Link to='/classroom/viewClass'>View Classes</Link>
+      <br />
+      
+      
     </>
 
   )

@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const ClassSchema = new mongoose.Schema({
     userId:{
         type: String,
+        // require: true,
         require: true
     },
     Classcode:{
