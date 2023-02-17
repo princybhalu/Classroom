@@ -6,6 +6,8 @@ import  Dashboard from './dashboard';
 import UpdateUser from './auth/updateUser';
 import { useSelector } from 'react-redux';
 import AllUser from './auth/allUser';
+import meetClone from './meetClone/meetClone';
+
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
             <Route  exect path={'/auth/update/:id'} element={ <UpdateUser  /> } ></Route>
             {/* <Route  exect path={'/auth/delete/:id'} element={ <UpdateUser  /> } ></Route> */}
             <Route exact path='/auth/allUser' element={ <AllUser /> } ></Route>
+            <Route exact path='/meetClone/meetClone' element={ <meetClone /> }></Route>
+
           </Route>
 
         </Routes>

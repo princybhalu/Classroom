@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link ,hashHistory} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+//import meetClone from './meetClone/meetClone';
 
 function dashboard () {
 
@@ -17,6 +18,9 @@ function dashboard () {
       <Link to={'/auth/update/'+ user._id } >Upadate User</Link>
       <br />
       <Link to='/auth/allUser'>All User</Link>
+      <br/>
+      <Link to='/meetClone/meetClone'>meet</Link>
+
     </>
 
   )
