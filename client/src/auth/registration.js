@@ -38,7 +38,8 @@ function Registration() {
                 .string()
                 .email('Must be a valid email')
                 .max(255)
-                .required('Email is required'),
+                .required(
+                    'Email is required'),
             firstName: Yup
                 .string()
                 .max(255)
@@ -94,6 +95,7 @@ function Registration() {
         <>
             <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
                 <Container>
+                    {/* <form onSubmit={formik.handleSubmit}> */}
                     <form onSubmit={formik.handleSubmit}>
                         <Box sx={{ my: 3 }}>
                             <Typography color="textPrimary" variant="h4" > Add Student & Teacher </Typography>
