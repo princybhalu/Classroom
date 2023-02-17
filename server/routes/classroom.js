@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Classroom = require("../models/Classroom");
-const User = require("../models/User");
 
 // Create Classroom
 // update
@@ -77,23 +76,6 @@ router.get("/getclass/:id",async(req,res)=>{
     }
 });
 
-//Get All Class Associalte With User Id
-router.get("/getAllClass/:id",async(req,res)=>{
-    
-    try{
-        const currentUser = await User.findById(req.params.id);
-        const classes = await Promise.all(
-            currentUser.classid.map(async(id)=>{
-                let getClassroom = await Classroom.findById(id);
-                return (getClassroom)
-            })
-        )
-        res.status(200).json(classes);
-
-    }catch(err){
-        res.status(500).json(err);
-    }
-})
 
 
 module.exports = router;

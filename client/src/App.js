@@ -2,12 +2,9 @@ import Registration  from './auth/registration';
 import { toast, ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link , useParams } from 'react-router-dom';
 import Login from './auth/login';
-import CreateClass from './classroom/createClass';
-import Dashboard from './dashboard';
+import  Dashboard from './dashboard';
 import UpdateUser from './auth/updateUser';
-import UpdateClass from './classroom/updateClass';
-import { useSelector } from 'react-redux'
-import ViewClass from './classroom/viewClass';
+import { useSelector } from 'react-redux';
 import AllUser from './auth/allUser';
 
 function App() {
@@ -29,15 +26,10 @@ function App() {
             {/* <Route  exect path={'/auth/delete/:id'} element={ <UpdateUser  /> } ></Route> */}
             <Route exact path='/auth/allUser' element={ <AllUser /> } ></Route>
           </Route>
-          <Route path='/classroom'>
-            <Route exact path='/classroom/createClass' element={ < CreateClass /> }></Route>
-            <Route exact path='/classroom/updateClass' element={ < UpdateClass /> }></Route>
-            <Route exact path='/classroom/ViewClass' element={ < ViewClass /> }></Route>
-          </Route>
 
         </Routes>
 
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={20000} />
+        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={200000} />
       </div>
     </Router>
   );
