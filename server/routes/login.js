@@ -11,7 +11,6 @@ router.post("/login", async (req,res)=>{
         const user = await User.findOne({userId:req.body.userId});
         !user && res.status(404).json("user not found")
 
-
         //check for correct password
         //here we are using bcrypt method compare for comparing password
         // const validPassword = await compare(req.body.password,user.dob);

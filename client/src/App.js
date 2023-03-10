@@ -10,6 +10,7 @@ import AllProfessorsList from './auth/allProfessors';
 import { RoleName } from './model/RoleName';
 import ErrorPage from './error'; 
 import Profile from './auth/profile';
+import Material from './auth/material';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route exact path='/auth/allStudents' element={ isLoggedIn ? user.role === RoleName.ADMIN ? <AllStudentsList /> : <ErrorPage /> : <Navigate to="/"/>} ></Route>
             <Route exact path='/auth/allProfessors' element={ isLoggedIn ? user.role === RoleName.ADMIN ? <AllProfessorsList /> : <ErrorPage /> : <Navigate to="/"/> } ></Route>
             <Route exact path='/auth/profile' element={ isLoggedIn ? <Profile /> : <Navigate to="/"/>}></Route>
+            <Route exact path='/auth/material/:userId' element={ <Material /> } ></Route>
           </Route>
 
         </Routes>

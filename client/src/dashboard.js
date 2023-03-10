@@ -11,7 +11,10 @@ function dashboard() {
   const user = useSelector(state => state.user);
 
   return (
+  <>
     <Navbar activeLink='Home' />
+     <Link to={'/auth/material/'+user.userId}>Material</Link>
+     </>
   );
 }
 

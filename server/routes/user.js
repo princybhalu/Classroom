@@ -90,7 +90,6 @@ router.get("/getAllStudents",async(req, res)=>{
     }
 })
 
-
 // get all Professors
 router.get("/getAllProfessors",async(req, res)=>{
     try{
@@ -105,3 +104,4 @@ router.get("/getAllProfessors",async(req, res)=>{
  
 
 module.exports = router;
+

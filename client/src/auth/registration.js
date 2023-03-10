@@ -1,7 +1,7 @@
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, FormLabel , RadioGroup , FormControlLabel , Radio  } from '@mui/material';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import axios from 'axios';
+import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router";
@@ -270,7 +270,6 @@ function Registration() {
 
                         </Grid>
                     </form>
-
                 </Container>
             </Box>
         </>
