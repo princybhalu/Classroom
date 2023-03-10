@@ -25,7 +25,8 @@ function Material(props) {
         // intial values
         initialValues: {
             title: '',
-            description : ''
+            description : '',
+            Attach : ''
         },
 
         // To check enter value is vaild or not 
@@ -35,14 +36,15 @@ function Material(props) {
 
         // for when click on submit button  
         onSubmit: async (values) => {
-            console.log("Data");
-            console.log(values);
+            // console.log("Data");
+            // console.log(values);
 
             //Request Body To Pass Api
             const RequestBody = {
                 userId : userId,//
                 Title : values.title,
                 Description : values.description,
+                Attach : values.Attach
             }
 
             try {
@@ -63,15 +65,15 @@ function Material(props) {
             }
         }
     });
-    console.log("as");  
-console.log(formik.isSubmitting);
+    // console.log("as");  
+// console.log(formik.isSubmitting);
     return (
         <>
         
             <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
                 <Container>
                     
-                    {/* <form onSubmit={formik.handleSubmit}> */}
+                    {/* <form onSubmit={formik.handleSubmit} action="/uploadphoto" enctype="multipart/form-data" method="POST" > */}
                     <form onSubmit={formik.handleSubmit}>
                         <Box sx={{ my: 3 }}>
                             <Typography color="textPrimary" variant="h4" > Material </Typography>
@@ -111,8 +113,9 @@ console.log(formik.isSubmitting);
                                     variant="outlined"
                                 />
                             </Grid> 
-                            
-                            
+                            {/* <Grid>
+                                <input type="file" name="myImage" accept="image/*"/>
+                            </Grid> */}
 
 
 

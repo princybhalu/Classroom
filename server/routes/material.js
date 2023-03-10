@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Material = require("../models/Material");
+const upload = require("../middleware/upload");
 
 //Upload Material
 //Edit Material
@@ -8,16 +9,20 @@ const Material = require("../models/Material");
 //Delete Material
 
 //Upload Material
-router.post("/upload",async(req,res)=>{
+router.post("/upload",upload.single('Attach'),async(req,res)=>{
     try{
         const newMaterial = new Material({
             userId: req.body.userId,
             Classid: req.body.Classid,
             Title: req.body.Title,
             Description:  req.body.Description,
-            Topic :  req.body.Topic, 
-            Attach: req.body.Attach
+            // Topic :  req.body.Topic, 
+            // Attach: req.body.Attach
         });
+        // console.log(req.file.path)
+        if(req.file){
+            newMaterial.Attach = req.file.path
+        }
         const saveMaterial = await newMaterial.save();
         res.status(200).json(saveMaterial);
     }catch(err){
@@ -66,24 +71,5 @@ router.delete("/delete/:id",async(req,res)=>{
     }
 });
 
-
-app.post("/uploadphoto",upload.single('myImage'),(req,res)=>{
-    var img = fs.readFileSync(req.file.path);
-    var encode_img = img.toString('base64');
-    var final_img = {
-        contentType:req.file.mimetype,
-        image:new Buffer(encode_img,'base64')
-    };
-    imageModel.create(final_img,function(err,result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(result.img.Buffer);
-            console.log("Saved To database");
-            res.contentType(final_img.contentType);
-            res.send(final_img.image);
-        }
-    })
-});
 
 module.exports = router;
