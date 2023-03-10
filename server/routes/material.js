@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Material = require("../models/Material");
+const upload = require("../middleware/upload");
 
 //Upload Material
 //Edit Material
@@ -8,16 +9,20 @@ const Material = require("../models/Material");
 //Delete Material
 
 //Upload Material
-router.post("/upload",async(req,res)=>{
+router.post("/upload",upload.single('Attach'),async(req,res)=>{
     try{
         const newMaterial = new Material({
             userId: req.body.userId,
             Classid: req.body.Classid,
             Title: req.body.Title,
             Description:  req.body.Description,
-            Topic :  req.body.Topic, 
-            Attach: req.body.Attach
+            // Topic :  req.body.Topic, 
+            // Attach: req.body.Attach
         });
+        // console.log(req.file.path)
+        if(req.file){
+            newMaterial.Attach = req.file.path
+        }
         const saveMaterial = await newMaterial.save();
         res.status(200).json(saveMaterial);
     }catch(err){
@@ -65,5 +70,6 @@ router.delete("/delete/:id",async(req,res)=>{
         res.status(500).json(err);
     }
 });
+
 
 module.exports = router;

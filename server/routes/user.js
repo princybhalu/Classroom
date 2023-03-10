@@ -78,36 +78,11 @@ router.get("/getOneUser/:id",async(req,res)=>{
     }
 });
 
-//update user when create class or join class
-router.put("/createOrJoinClass/:id",async(req,res)=>{
+// get all Students
+router.get("/getAllStudents",async(req, res)=>{
     try{
-        const updateuser = await User.findById(req.params.id);
-        if(updateuser.userId === req.body.userId){
-            await updateuser.updateOne({$push: {classid :req.body.classid}});
-            res.status(200).json("User Has Been Updated.");
-        }
-        else{
-            res.status(403).json("You Can Not Update User")
-        }
-    }catch(err){
-        res.status(500).json(err);
-    }
-});
+        const users = await User.find({ activestatus : true , role: "Student" });
 
-
-
-//get all users
-// router.get("/getAllUser",async(req, res)=>{
-//     try{
-        
-//     }catch(err){
-//         res.status(500).json(err);
-//     }
-// })
-// get all users
-router.get("/getAllUser",async(req, res)=>{
-    try{
-        const users = await User.find();
         res.status(200).json(users);
     }catch(err){
         console.log(err);
@@ -115,5 +90,18 @@ router.get("/getAllUser",async(req, res)=>{
     }
 })
 
+// get all Professors
+router.get("/getAllProfessors",async(req, res)=>{
+    try{
+        const users = await User.find({ activestatus : true , role: "Professor" });
+
+        res.status(200).json(users);
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+ 
 
 module.exports = router;
+
