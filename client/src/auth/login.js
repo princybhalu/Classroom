@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container,  Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router";
 import { useDispatch } from 'react-redux';
 import { signIn } from '../redux/slices/userSlice';
-
+import CaptchaTest from './ChaptaTest';
 
 const login = () => {
 
@@ -18,7 +18,11 @@ const login = () => {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const dispatch = useDispatch();
-    
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [ChaptaTestResult, SetChaptaTestResult] = useState(0);
+
+    console.log(ChaptaTestResult);
 
     // form controller
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -37,16 +41,16 @@ const login = () => {
         // for when click on submit button  
         onSubmit: async (values) => {
 
+            // if(ChaptaTestResult === 0 ) return ;
             // set object to pass request of Backend url
             const requestUserLogin = {
-                userId : values.userId,
-                password : values.password
+                userId: values.userId,
+                password: values.password
             }
 
             try {
                 // call to backend url
-                const response = await axios.post('/login/', requestUserLogin);
-    
+                const response = await axios.post('/login/login', requestUserLogin);
 
                 // status of response
                 console.log(response);
@@ -59,10 +63,10 @@ const login = () => {
             } catch (err) {
                 if (err.status === 400) {
                     toast.error("Wrong Password");
-                }else if(err.status === 404){
+                } else if (err.status === 404) {
                     toast.error("You are not Authorize")
                 }
-                else{
+                else {
                     toast.error(err.message);
                 }
                 console.log(err);
@@ -80,7 +84,7 @@ const login = () => {
                             <Typography color="textSecondary" gutterBottom variant="body2" > Login For admin , teacher and student </Typography>
                         </Box>
 
-                        {/* Email input */}
+                        {/* User Id */}
                         <TextField
                             error={Boolean(formik.touched.userId && formik.errors.userId)}
                             fullWidth
@@ -94,7 +98,7 @@ const login = () => {
                             variant="outlined"
                         />
 
-                        {/* Password Input */}
+                        {/* Date of birth */}
                         <TextField
                             error={Boolean(formik.touched.password && formik.errors.password)}
                             fullWidth
@@ -109,6 +113,8 @@ const login = () => {
                             variant="outlined"
                         />
 
+                        {/* <CaptchaTest parentCallbackChaptaTestResult={SetChaptaTestResult}/> */}
+                    
                         {/* Submit Btn */}
                         <Box sx={{ py: 2 }}>
                             <Button color="primary" disabled={formik.isSubmitting} fullWidth size="large" type="submit" variant="contained">

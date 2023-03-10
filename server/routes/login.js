@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 
 //Login
-router.post("/", async (req,res)=>{
+router.post("/login", async (req,res)=>{
 
 
     try{
@@ -23,9 +23,6 @@ router.post("/", async (req,res)=>{
 
 
         res.status(200).json(user);
-
-
-
 
     }catch(err){
         res.status(500).json(err);
