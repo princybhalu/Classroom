@@ -78,10 +78,11 @@ router.get("/getOneUser/:id",async(req,res)=>{
     }
 });
 
-// get all users
-router.get("/getAllUser",async(req, res)=>{
+// get all Students
+router.get("/getAllStudents",async(req, res)=>{
     try{
-        const users = await User.find();
+        const users = await User.find({ activestatus : true , role: "Student" });
+
         res.status(200).json(users);
     }catch(err){
         console.log(err);
@@ -89,5 +90,18 @@ router.get("/getAllUser",async(req, res)=>{
     }
 })
 
+
+// get all Professors
+router.get("/getAllProfessors",async(req, res)=>{
+    try{
+        const users = await User.find({ activestatus : true , role: "Professor" });
+
+        res.status(200).json(users);
+    }catch(err){
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+ 
 
 module.exports = router;
