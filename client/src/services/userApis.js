@@ -11,7 +11,7 @@ export const GetOneUserApiCall = async (id) => {
 }
 
 export const UpdateUserApiCall = async (id , rbody) => {
-    const res = await axios.put('/user//update/' + id , rbody);
+    const res = await axios.put('/user/update/' + id , rbody);
     return res ;
 }
 

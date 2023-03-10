@@ -30,7 +30,8 @@ const MaterialSchema = new mongoose.Schema({
         default: ""
     },
     Attach:{
-        type: String,
+        data: Buffer,
+        contentType: String
     }
 },
 {timestamps: true}

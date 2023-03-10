@@ -17,6 +17,8 @@ function dashboard () {
       <Link to={'/auth/update/'+ user._id } >Upadate User</Link>
       <br />
       <Link to='/auth/allUser'>All User</Link>
+      <br />
+      <Link to={'/auth/material/'+user.userId}>Material</Link>
     </>
 
   )
