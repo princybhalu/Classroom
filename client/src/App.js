@@ -11,7 +11,9 @@ import { RoleName } from './model/RoleName';
 import ErrorPage from './error'; 
 import Profile from './auth/profile';
 import Material from './auth/material';
-
+import UpdateClass from './classroom/updateClass';
+import { useSelector } from 'react-redux'
+import ViewClass from './classroom/viewClass';
 
 function App() {
 
