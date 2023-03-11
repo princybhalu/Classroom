@@ -10,6 +10,8 @@ const Assignment = require('./routes/assignment');
 const Material = require('./routes/material');
 const loginRoute = require('./routes/login');
 
+
+
 //creating an express application which name is app
 const app = express();
 
@@ -25,6 +27,7 @@ mongoose.connect(
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+
 
 app.use("/user",userRoute);
 app.use("/login",loginRoute);

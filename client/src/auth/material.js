@@ -6,6 +6,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from "react-router";
 import { UploadMaterial } from '../services/materialApis';
+import { useState } from 'react';
+import env from "react-dotenv";
+// const dotenv = require('dotenv');
+// import dotenv.config 
 
 
 
@@ -18,6 +22,8 @@ function Material(props) {
     const today = new Date();
 
     const navigate = useNavigate();
+
+    const [file,fileChange] = useState();
 
     // form controller
     const formik = useFormik({
@@ -40,15 +46,34 @@ function Material(props) {
             // console.log(values);
 
             //Request Body To Pass Api
+
+            const formData = new FormData();
+            console.log(file)
+            formData.append("file", file);
+            formData.append("upload_preset", "classroom_preset");
+            
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/djj0dl6dz/image/upload`,
+                    {
+                        method: "post",
+                        body: formData,
+                    }
+                );
+
+            let urlData = await response.json();
+            urlData = urlData?.url;
+            console.log(urlData);
+
             const RequestBody = {
-                userId : userId,//
+                userId : userId,
                 Title : values.title,
                 Description : values.description,
-                Attach : values.Attach
+                Attach : urlData
             }
 
             try {
                 // call to backend url
+                console.log(file)
                 const response = await UploadMaterial(RequestBody);
 
                 //  status of respose 
@@ -59,18 +84,20 @@ function Material(props) {
                 }
 
             } catch (err) {
-
                 toast.error(err.message);
                 console.log(err.message);
             }
         }
     });
+
     // console.log("as");  
-// console.log(formik.isSubmitting);
+    // console.log(formik.isSubmitting);
+
+
     return (
         <>
         
-            <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
+             <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
                 <Container>
                     
                     {/* <form onSubmit={formik.handleSubmit} action="/uploadphoto" enctype="multipart/form-data" method="POST" > */}
@@ -113,9 +140,18 @@ function Material(props) {
                                     variant="outlined"
                                 />
                             </Grid> 
-                            {/* <Grid>
-                                <input type="file" name="myImage" accept="image/*"/>
-                            </Grid> */}
+                            <Grid>
+                                <input 
+                                  type="file" 
+                                  name="image" 
+                                  accept="image/*"
+                                  value={formik.values.image}
+                                  onBlur={formik.handleBlur}
+                                  onChange={(e) => {formik.handleChange(e) ;
+                                                    fileChange(e.target.files[0])}}
+                                />
+                                
+                            </Grid> 
 
 
 
@@ -132,8 +168,15 @@ function Material(props) {
                 </Container>
             </Box>
             
+            <form>
+
+            </form>
+
+            
         </>
     );
+    
 }
 
 export default Material;
+

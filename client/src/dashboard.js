@@ -19,6 +19,8 @@ function dashboard () {
       <Link to='/auth/allUser'>All User</Link>
       <br />
       <Link to={'/auth/material/'+user.userId}>Material</Link>
+      <br />
+      <Link to={'/auth/showmaterial/'+user.userId}>Show Material</Link>
     </>
 
   )
