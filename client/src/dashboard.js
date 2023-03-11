@@ -6,13 +6,14 @@ import { useNavigate } from "react-router";
 import './css/dashboard.css';
 import { Link } from 'react-router-dom';
 
+
 function dashboard() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const user = useSelector(state => state.user);
   return (
     <>
-      <div>dashboard</div>
+      {/* <div>dashboard</div>
       <br />
       <Link to='/auth/login'>Login For All</Link>
       <br />
@@ -24,7 +25,8 @@ function dashboard() {
       <br />
       <Link to={'/auth/material/'+user.userId}>Material</Link>
       <br />
-      <Link to={'/auth/showmaterial/'+user.userId}>Show Material</Link>
+      <Link to={'/auth/showmaterial/'+user.userId}>Show Material</Link> */}
+      <Navbar activeLink='Home' />
     </>
 
   )
