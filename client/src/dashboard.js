@@ -13,7 +13,7 @@ function dashboard() {
   return (
   <>
     <Navbar activeLink='Home' />
-     <Link to={'/auth/material/'+user.userId}>Material</Link>
+     {/* <Link to={'/auth/material/'+user.userId}>Material</Link> */}
      </>
   );
 }

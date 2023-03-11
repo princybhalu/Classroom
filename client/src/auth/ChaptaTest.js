@@ -17,14 +17,16 @@ class CaptchaTest extends Component {
     let user_captcha = document.getElementById("user_captcha_input").value;
 
     if (validateCaptcha(user_captcha) === true) {
-    //   alert("Captcha Matched");
-      loadCaptchaEnginge(6);
+      alert("Captcha Matched");
+      loadCaptchaEnginge(8);
       this.props.parentCallbackChaptaTestResult(1);
-      document.getElementById("user_captcha_input").value = "";
+      this.props.parentCallBackOpenCaptchaTest(false);
+      // document.getElementById("user_captcha_input").value = "";
     } else {
-    //   alert("Captcha Does Not Match");
+      alert("Captcha Does Not Match Try Again");
       document.getElementById("user_captcha_input").value = "";
     }
+
   };
 
   render() {

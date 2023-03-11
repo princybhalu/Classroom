@@ -39,7 +39,7 @@ function App() {
 
         </Routes>
 
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={200000} theme="dark" />
+        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={20000} theme="dark" />
       </div>
     </Router>
   );

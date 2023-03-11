@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography, Modal, Checkbox, FormHelperText } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +11,20 @@ import { useNavigate } from "react-router";
 import { useDispatch } from 'react-redux';
 import { signIn } from '../redux/slices/userSlice';
 import CaptchaTest from './ChaptaTest';
+
+const style = {
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '75%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    borderTop: '10px solid #000',
+    boxShadow: 24,
+    p: 4
+};
+
 
 const login = () => {
 
@@ -21,8 +36,13 @@ const login = () => {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [ChaptaTestResult, SetChaptaTestResult] = useState(0);
+    const [OpenCaptchaTest, SetOpenCaptchaTest] = useState(false);
 
     console.log(ChaptaTestResult);
+
+    const handleChange = () => {
+        SetOpenCaptchaTest(true);
+    }
 
     // form controller
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -30,12 +50,14 @@ const login = () => {
         // initial values
         initialValues: {
             userId: '',
-            password: ''
+            password: '',
+            isDoneCaptcha: false
         },
         // To check enter value is vaild or not 
         validationSchema: Yup.object({
             userId: Yup.string().max(255).required('User Id  is required'),
-            password: Yup.string().max(255).required('Password is required')
+            password: Yup.string().max(255).required('Password is required'),
+            isDoneCaptcha: Yup.boolean().oneOf([false], 'Please Verify Captcha Test')
         }),
 
         // for when click on submit button  
@@ -113,8 +135,28 @@ const login = () => {
                             variant="outlined"
                         />
 
-                        {/* <CaptchaTest parentCallbackChaptaTestResult={SetChaptaTestResult}/> */}
-                    
+                        <Box sx={{ alignItems: 'center', display: 'flex', ml: -1 }} >
+                            <Checkbox name="captchaCheckbox" onChange={handleChange} />
+                            <Typography color="textSecondary" variant="body2">
+                                Open Captcha Test
+                            </Typography>
+                        </Box>
+
+                        {/* to display error if check box is not checked */}
+                        {Boolean(formik.touched.isDoneCaptcha && formik.errors.isDoneCaptcha) && (
+                            <FormHelperText error>
+                                {formik.errors.isDoneCaptcha}
+                            </FormHelperText>
+                        )}
+
+                        <Modal open={OpenCaptchaTest} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                            <Box sx={style}>
+                                <div style={{paddingLeft : '40%'}}>
+                                    <CaptchaTest parentCallbackChaptaTestResult={SetChaptaTestResult} parentCallBackOpenCaptchaTest={SetOpenCaptchaTest} />
+                                </div>
+                            </Box>
+                        </Modal>
+
                         {/* Submit Btn */}
                         <Box sx={{ py: 2 }}>
                             <Button color="primary" disabled={formik.isSubmitting} fullWidth size="large" type="submit" variant="contained">
