@@ -31,7 +31,8 @@ function Material(props) {
         initialValues: {
             title: '',
             description : '',
-            Attach : ''
+            Attach : '',
+            Classid : '',
         },
 
         // To check enter value is vaild or not 
@@ -66,7 +67,8 @@ function Material(props) {
                 userId : userId,
                 Title : values.title,
                 Description : values.description,
-                Attach : urlData
+                Attach : urlData,
+                Classid : '63c0fb0683a0bbaf03ba50a7'
             }
 
             try {

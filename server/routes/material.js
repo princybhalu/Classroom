@@ -42,9 +42,9 @@ router.put("/edit/:id",async(req,res)=>{
 });
 
 //View Material
-router.get("/view/:id",async(req,res)=>{
+router.post("/view",async(req,res)=>{
     try{
-        const viewMaterial = await Material.findById(req.params.id);
+        const viewMaterial = await Material.find({Classid : req.body.Classid});
         res.status(200).json(viewMaterial);
     }catch(err){
         res.status(500).json(err);

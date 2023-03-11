@@ -10,9 +10,9 @@ import AllProfessorsList from './auth/allProfessors';
 import { RoleName } from './model/RoleName';
 import ErrorPage from './error';
 import Profile from './auth/profile';
-import Material from './auth/material';
+import Material from './material/uploadMaterial';
 import JoinClassroom from './classroom/joinClassroom';
-
+import ViewMaterial from './material/viewMaterial';
 
 function App() {
 
@@ -35,12 +35,15 @@ function App() {
             <Route exact path='/auth/allStudents' element={isLoggedIn ? user.role === RoleName.ADMIN ? <AllStudentsList /> : <ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/allProfessors' element={isLoggedIn ? user.role === RoleName.ADMIN ? <AllProfessorsList /> : <ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/profile' element={isLoggedIn ? <Profile /> : <Navigate to="/" />}></Route>
-            <Route exact path='/auth/material/:userId' element={<Material />} ></Route>
           </Route>
 
           <Route path='/classroom' >
             <Route exact path='/classroom/joinClassroom' element={isLoggedIn ? < JoinClassroom /> : < Login />}></Route>
+          </Route>
 
+          <Route path='/material' >
+            <Route exact path='/material/uploadMaterial/:userId' element={<Material />} ></Route>
+            <Route exact path='/material/viewMaterial/:userId' element={<ViewMaterial />} ></Route>
           </Route>
 
 

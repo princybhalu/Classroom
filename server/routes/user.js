@@ -83,7 +83,6 @@ router.get("/getOneUser/:id", async (req, res) => {
 router.get("/getAllStudents", async (req, res) => {
     try {
         const users = await User.find({ activestatus: true, role: "Student" });
-
         res.status(200).json(users);
     } catch (err) {
         console.log(err);
