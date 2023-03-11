@@ -25,10 +25,10 @@ const MaterialSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    Topic:{
-        type: String,
-        default: ""
-    },
+    // Topic:{
+    //     type: String,
+    //     default: ""
+    // },
     Attach:{
         type: String
         // data: Buffer,
