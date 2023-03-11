@@ -1,17 +1,11 @@
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from "react-router";
 import { UploadMaterial } from '../services/materialApis';
 import { useState } from 'react';
-import env from "react-dotenv";
-// const dotenv = require('dotenv');
-// import dotenv.config 
-
-
 
 function Material(props) {
 
@@ -46,7 +40,6 @@ function Material(props) {
             // console.log(values);
 
             //Request Body To Pass Api
-
             const formData = new FormData();
             console.log(file)
             formData.append("file", file);
@@ -89,9 +82,6 @@ function Material(props) {
             }
         }
     });
-
-    // console.log("as");  
-    // console.log(formik.isSubmitting);
 
 
     return (
