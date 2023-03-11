@@ -7,6 +7,10 @@
 
 const mongoose = require("mongoose");
 
+var someDate = new Date();
+var numberOfDaysToAdd = 10;
+var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+
 const AssigmentSchema = new mongoose.Schema({
     userId:{
         type: String,
@@ -22,11 +26,11 @@ const AssigmentSchema = new mongoose.Schema({
     },
     Instructions:{
         type: String,
-        default: ""
+        // default: ""
     },
-    Topic:{
+    Title:{
         type: String,
-        default: ""
+        // default: ""
     },
     Points:{
         type: Number,
@@ -36,7 +40,7 @@ const AssigmentSchema = new mongoose.Schema({
     },
     DueDate:{
         type: Date,
-        default: Date()
+        default: result   
     },
     Attach:{
         type: String,

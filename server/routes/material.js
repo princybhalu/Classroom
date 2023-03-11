@@ -9,7 +9,7 @@ const upload = require("../middleware/upload");
 //Delete Material
 
 //Upload Material
-router.post("/upload",upload.single('Attach'),async(req,res)=>{
+router.post("/upload",upload.array('Attach[]'),async(req,res)=>{
     try{
         const newMaterial = new Material({
             userId: req.body.userId,
@@ -20,8 +20,13 @@ router.post("/upload",upload.single('Attach'),async(req,res)=>{
             // Attach: req.body.Attach
         });
         // console.log(req.file.path)
-        if(req.file){
-            newMaterial.Attach = req.file.path
+        if(req.files){
+            let path = ''
+            req.files.forEach(function(files,index,arr){
+                path = path + files.path + ','
+            })
+            path = path.substring(0, path.lastIndexOf(","))
+            newMaterial.Attach = path
         }
         const saveMaterial = await newMaterial.save();
         res.status(200).json(saveMaterial);

@@ -113,9 +113,21 @@ function Material(props) {
                                     variant="outlined"
                                 />
                             </Grid> 
-                            {/* <Grid>
-                                <input type="file" name="myImage" accept="image/*"/>
-                            </Grid> */}
+
+                            <Grid item xs={12} md={0} >
+                                {/* Attach */}
+                                <input type="file" name="Attach" 
+                                    error={Boolean(formik.touched.Attach && formik.errors.Attach)}
+                                    // fullWidth
+                                    helperText={formik.touched.Attach && formik.errors.Attach}
+                                    margin="normal"
+                                    onBlur={formik.handleBlur}
+                                    onChange={formik.handleChange}
+                                    value={formik.values.Attach}
+                                    variant="outlined"
+                                />
+
+                            </Grid> 
 
 
 
