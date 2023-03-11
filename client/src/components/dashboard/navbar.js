@@ -112,7 +112,7 @@ function Navbar(props) {
 
 
                                 {/* For Teacher */}
-                                {page === 'Create Classroom' && <Button onClick={() => { navigate('/'); }} className={props.activeLink === 'Create Classroom' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Create Classroom</Button>}
+                                {page === 'Create Classroom' && <Button onClick={() => { navigate('/classroom/createClassroom'); }} className={props.activeLink === 'Create Classroom' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Create Classroom</Button>}
                                 {page === 'View Craeted Classes' && <Button onClick={() => { navigate('/'); }} className={props.activeLink === 'View Craeted Classes' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>View Craeted Classes</Button>}
 
                                 {/* For Student */}

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Classroom = require("../models/Classroom");
+const User = require("../models/User");
 
 // Create Classroom
 // update
@@ -27,16 +28,19 @@ router.post("/createclass",async(req,res)=>{
             Subject: req.body.Subject,
             Department: req.body.Department,
             Classname: req.body.Classname,
-            Teacher: req.body.Teacher,
+            Professor: req.body.Professor_id,
+            Subtitle: req.body.Subtitle ,
             ClassActiveStatus: true 
         });
         const Class = await newClass.save();
-        res.status(200).json(Class);
+        const user = await User.findById(req.body.Professor_id);
+        await user.updateOne({ $push: { classid: Class._id } });
+        res.status(200).json(Class._id);
     }catch(err){
         res.status(500).json(err);
+        console.log(err);
     }
 });
-
 
 //Update Classroom
 router.put("/updateclass/:id",async(req,res)=>{
@@ -48,7 +52,6 @@ router.put("/updateclass/:id",async(req,res)=>{
         res.status(500).json(err);
     }
 });
-
 
 //Inactive Classroom
 router.put("/Inactiveclass/:id",async(req,res)=>{
@@ -64,7 +67,6 @@ router.put("/Inactiveclass/:id",async(req,res)=>{
         res.status(500).json(err);
     }
 });
-
 
 //Get Classroom by id 
 router.get("/getclass/:id",async(req,res)=>{

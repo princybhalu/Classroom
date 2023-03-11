@@ -24,3 +24,8 @@ export const DeleteUserApiCall = async (id  , rbody) => {
     const res = await axios.put('/user/InactivateUser/' + id , rbody );
     return res ;
 } 
+
+export const JoinClassroomApiCall = async (rbody) => {
+    const res = await axios.put('/user/joinclassRoom' , rbody);
+    return res;
+}

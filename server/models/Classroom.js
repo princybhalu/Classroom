@@ -34,7 +34,7 @@ const ClassSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    Teacher:{
+    Professor:{
         type: String,
         required: true,
     },

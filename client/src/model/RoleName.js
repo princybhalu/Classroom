@@ -1,5 +1,5 @@
 export class RoleName {
     static STUDENT = "Student";
-    static PROFESSOR = "Professors";
+    static PROFESSOR = "Professor";
     static ADMIN = "Admin";
 }
