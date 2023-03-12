@@ -41,6 +41,7 @@ function Material(props) {
         // To check enter value is vaild or not 
         validationSchema: Yup.object({   
             title: Yup.string().required("Title is required"),
+            // discription: Yup.string().required("Description is required"),
         }),
 
         // for when click on submit button  
@@ -166,13 +167,7 @@ function Material(props) {
                     
     
                 </Container>
-            </Box>
-            
-            <form>
-
-            </form>
-
-            
+            </Box>            
         </>
     );
     

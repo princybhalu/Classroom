@@ -12,25 +12,11 @@ function ViewMaterial() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [Material, SetMaterial] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [open, setOpen] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [deleteMatrial, SetDeteleMaterial] = useState({});
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isDisableDeleteBtn, SetisDisableDeleteBtn] = useState(1);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
 
   const user = useSelector(state => state.user);
-
-  const handleOpen = () => setOpen(true);
-
-  // useEffect(() => {
-  //   if(deleteMatrial !== {})
-  //     DeleteMatrialCall(deleteMatrial);
-  //     console.log(deleteMatrial);
-  // },[deleteMatrial])
 
   const DeleteMatrialCall = async (deleteMatrial) => {
     console.log('delete Matrial');
@@ -47,9 +33,6 @@ function ViewMaterial() {
       if (res.status === 200) {
         toast.success(res.data);
         console.log(res.data);
-        SetDeteleMaterial({});
-        setOpen(false);
-        SetisDisableDeleteBtn(1);
         navigate('/auth/allStudents');
     }
     } catch (err) {
@@ -78,8 +61,11 @@ function ViewMaterial() {
                 <img src={`https://res.cloudinary.com/djj0dl6dz/image/fetch/f_auto,q_auto:good,c_limit,h_200,w_200/${material.Attach}#page=1`} style={{ border: '1px solid black' }} alt="PDF Front Page" />
             </a>
             <h4>{material._id}</h4>
-            <Button onClick={async () => { await SetDeteleMaterial(material); console.log(deleteMatrial); DeleteMatrialCall(material._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
+            <Button onClick={async () => {DeleteMatrialCall(material._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
               Delete
+            </Button>
+            <Button onClick={() => { navigate('/material/update/' + material._id) }} variant="contained" sx={{ marginRight: '5px' }}>
+              Edit
             </Button>
             <br/>
 

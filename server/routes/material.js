@@ -51,6 +51,16 @@ router.post("/view",async(req,res)=>{
     }
 });
 
+//get one material
+router.get("/getOneMaterial/:id", async(req,res)=>{
+    try{
+        const viewOneMaterial = await Material.findById(req.params.id);
+        res.status(200).json(viewOneMaterial);
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
+
 //Delete Material
 router.post("/delete/:id",async(req,res)=>{
     try{

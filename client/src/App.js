@@ -13,6 +13,7 @@ import Profile from './auth/profile';
 import Material from './material/uploadMaterial';
 import JoinClassroom from './classroom/joinClassroom';
 import ViewMaterial from './material/viewMaterial';
+import UpdateMaterial from './material/updateMaterial';
 
 function App() {
 
@@ -45,6 +46,8 @@ function App() {
           <Route path='/material' >
             <Route exact path='/material/uploadMaterial/:userId' element={<Material />} ></Route>
             <Route exact path='/material/viewMaterial/:userId' element={<ViewMaterial />} ></Route>
+            <Route exact path='/material/update/:MaterialId' element={<UpdateMaterial />} ></Route>
+            
           </Route>
 
 
