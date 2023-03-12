@@ -44,6 +44,9 @@ function App() {
 
           <Route path='/classroom' >
             <Route exact path='/classroom/joinClassroom' element={isLoggedIn ? < JoinClassroom /> : < Login />}></Route>
+            <Route exact path='/classroom/createClassroom' element={isLoggedIn ?  user.role === RoleName.PROFESSOR ? < CreateClassroom /> : <ErrorPage /> : < Login />}></Route>
+            <Route exact path='/classroom/viewClassroom/:class_id' element={isLoggedIn ? < ViewClassroom /> : < Login />}></Route>
+
           </Route>
 
           <Route path='/material' >
@@ -54,15 +57,12 @@ function App() {
 
           <Route path='/assignment' >
             <Route exact path='/assignment/uploadAssignment/:user_Id' element={<UploadAssignment />}></Route>
-            <Route exact path='/classroom/createClassroom' element={isLoggedIn ?  user.role === RoleName.PROFESSOR ? < CreateClassroom /> : <ErrorPage /> : < Login />}></Route>
-            <Route exact path='/classroom/viewClassroom/:class_id' element={isLoggedIn ? < ViewClassroom /> : < Login />}></Route>
-
           </Route>
 
 
         </Routes>
 
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={20000} theme="dark" />
+        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={1000} theme="dark" />
       </div>
     </Router>
   );

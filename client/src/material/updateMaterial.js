@@ -83,8 +83,7 @@ export default function UpdateMaterial() {
                     description: material.Description,
                     // title : '',
                     // description: '',
-                    Attach: "",
-                    Classid: "",
+                    Attach: ""
                   }
                 }
                 validationSchema={validationSchema}
@@ -115,7 +114,6 @@ export default function UpdateMaterial() {
                     Title: values.title,
                     Description: values.description,
                     Attach: urlData,
-                    Classid: "63c0fb0683a0bbaf03ba50a7",
                   };
 
                   try {

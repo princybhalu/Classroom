@@ -8,7 +8,7 @@ import { DeleteMatrialApiCall } from '../services/materialApis';
 import { useSelector } from 'react-redux';
 
 
-function ViewMaterial() {
+function ViewMaterial(props) {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [Material, SetMaterial] = useState([]);
@@ -44,7 +44,7 @@ function ViewMaterial() {
   }
 
   const requestBody = {
-    Classid : "63c0fb0683a0bbaf03ba50a7"
+    Classid : props.class_id 
   }
 
   viewMaterialApiCall(requestBody).then((result) => { SetMaterial(result);}).catch((err) => {console.error(err)});

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GetClassroomByClassidApiCall } from '../services/classroomApis';
+import ViewMaterial from '../material/viewMaterial';
+import Material from '../material/uploadMaterial';
 
 function ViewClassroom() {
 
@@ -10,7 +12,10 @@ function ViewClassroom() {
   GetClassroomByClassidApiCall(class_id).then((result) => { SetClassroom(result); }).catch((err) => { console.log(err) });
 
   return (
-    <> </>
+    <>
+    <ViewMaterial class_id={class_id} />
+    <Material class_id={class_id} />
+     </>
   )
 }
 

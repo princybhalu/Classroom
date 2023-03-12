@@ -72,7 +72,7 @@ function Material(props) {
                 Title : values.title,
                 Description : values.description,
                 Attach : urlData,
-                Classid : '63c0fb0683a0bbaf03ba50a7'
+                Classid : props.class_id
             }
 
             try {
