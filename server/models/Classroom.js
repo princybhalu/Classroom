@@ -34,7 +34,11 @@ const ClassSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    Professor:{
+    Professor_id:{
+        type: String,
+        required: true,
+    },
+    Professor_name:{
         type: String,
         required: true,
     },

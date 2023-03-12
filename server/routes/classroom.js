@@ -28,7 +28,8 @@ router.post("/createclass",async(req,res)=>{
             Subject: req.body.Subject,
             Department: req.body.Department,
             Classname: req.body.Classname,
-            Professor: req.body.Professor_id,
+            Professor_id: req.body.Professor_id,
+            Professor_name: req.body.Professor_name,
             Subtitle: req.body.Subtitle ,
             ClassActiveStatus: true 
         });
@@ -68,11 +69,28 @@ router.put("/Inactiveclass/:id",async(req,res)=>{
     }
 });
 
-//Get Classroom by id 
+//Get Classroom by class id 
 router.get("/getclass/:id",async(req,res)=>{
     try{
         const getClassroom = await Classroom.findById(req.params.id);
         res.status(200).json(getClassroom);
+    }catch(err){
+        res.status(500).json(err);
+    }
+});
+
+// Get Classroom list by user id
+router.get("/getClassroomList/:id",async(req,res)=>{
+    try{
+        const currentUser = await User.findById(req.params.id);
+        const classes = await Promise.all(
+            currentUser.classid.map(async(id)=>{
+                let getClassroom = await Classroom.findById(id);
+                return (getClassroom)
+            })
+        )
+        res.status(200).json(classes);
+
     }catch(err){
         res.status(500).json(err);
     }

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { CreateClassroomApiCall } from '../services/classroomApis';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router";
+import { useAsyncError, useNavigate } from "react-router";
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import Navbar from '../components/dashboard/navbar';
 import { DepartmentSelectItemList } from '../model/DepartmentSelectItemList';
@@ -51,7 +51,8 @@ function CreateClassroom() {
                 Department: values.Department,
                 Classname: values.Classname,
                 Subtitle: values.Subtitle,
-                Professor_id: user._id
+                Professor_id: user._id,
+                Professor_name: user.name 
             }
             console.log(RequestBody);
 
