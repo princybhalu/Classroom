@@ -1,13 +1,13 @@
 import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, OutlinedInput } from '@mui/material';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from "react-router";
 import { UploadMaterial } from '../services/materialApis';
 import { useState } from 'react';
-// import env from "react-dotenv";
+import { useSelector } from 'react-redux';
+//import env from "react-dotenv";
 // const dotenv = require('dotenv');
 // import dotenv.config 
 
@@ -15,9 +15,11 @@ import { useState } from 'react';
 
 function Material(props) {
 
-    let {userId} = useParams();
+    // let {userId} = useParams();
 
-    console.log(userId);
+    const user = useSelector(state => state.user);
+
+    // console.log(userId);
 
     const today = new Date();
 
@@ -32,12 +34,14 @@ function Material(props) {
         initialValues: {
             title: '',
             description : '',
-            Attach : ''
+            Attach : '',
+            Classid : '',
         },
 
         // To check enter value is vaild or not 
         validationSchema: Yup.object({   
             title: Yup.string().required("Title is required"),
+            // discription: Yup.string().required("Description is required"),
         }),
 
         // for when click on submit button  
@@ -46,7 +50,6 @@ function Material(props) {
             // console.log(values);
 
             //Request Body To Pass Api
-
             const formData = new FormData();
             console.log(file)
             formData.append("file", file);
@@ -65,10 +68,11 @@ function Material(props) {
             console.log(urlData);
 
             const RequestBody = {
-                userId : userId,
+                user_Id : user._id,
                 Title : values.title,
                 Description : values.description,
-                Attach : urlData
+                Attach : urlData,
+                Classid : '63c0fb0683a0bbaf03ba50a7'
             }
 
             try {
@@ -89,9 +93,6 @@ function Material(props) {
             }
         }
     });
-
-    // console.log("as");  
-    // console.log(formik.isSubmitting);
 
 
     return (
@@ -166,13 +167,7 @@ function Material(props) {
                     
     
                 </Container>
-            </Box>
-            
-            <form>
-
-            </form>
-
-            
+            </Box>            
         </>
     );
     

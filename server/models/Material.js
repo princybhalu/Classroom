@@ -9,7 +9,7 @@
 const mongoose = require("mongoose");
 
 const MaterialSchema = new mongoose.Schema({
-    userId:{
+    user_Id:{
         type: String,
         require: true
     },

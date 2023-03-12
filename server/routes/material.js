@@ -12,11 +12,11 @@ const upload = require("../middleware/upload");
 router.post("/upload",async(req,res)=>{
     try{
         const newMaterial = new Material({
-            userId: req.body.userId,
+            user_Id: req.body.user_Id,
             Classid: req.body.Classid,
             Title: req.body.Title,
             Description:  req.body.Description,
-            // Topic :  req.body.Topic, 
+            Topic :  req.body.Topic, 
             Attach: req.body.Attach
         });
         
@@ -42,21 +42,33 @@ router.put("/edit/:id",async(req,res)=>{
 });
 
 //View Material
-router.get("/view/:id",async(req,res)=>{
+router.post("/view",async(req,res)=>{
     try{
-        const viewMaterial = await Material.findById(req.params.id);
+        const viewMaterial = await Material.find({Classid : req.body.Classid});
         res.status(200).json(viewMaterial);
     }catch(err){
         res.status(500).json(err);
     }
 });
 
+//get one material
+router.get("/getOneMaterial/:id", async(req,res)=>{
+    try{
+        const viewOneMaterial = await Material.findById(req.params.id);
+        res.status(200).json(viewOneMaterial);
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
+
 //Delete Material
-router.delete("/delete/:id",async(req,res)=>{
+router.post("/delete/:id",async(req,res)=>{
     try{
         const DeleteMaterial = await Material.findById(req.params.id);
-        // console.log(DeleteMaterial);
-        if(DeleteMaterial.userId === req.body.userId){
+        console.log(DeleteMaterial);
+        console.log(DeleteMaterial.user_Id)
+        console.log(req.body.user_Id)
+        if(DeleteMaterial.user_Id == req.body.user_Id){
             await DeleteMaterial.delete();
             res.status(200).json("Material has been deleted.");
         }

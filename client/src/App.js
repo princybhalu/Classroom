@@ -10,11 +10,13 @@ import AllProfessorsList from './auth/allProfessors';
 import { RoleName } from './model/RoleName';
 import ErrorPage from './error';
 import Profile from './auth/profile';
-import Material from './auth/material';
+import Material from './material/uploadMaterial';
 import JoinClassroom from './classroom/joinClassroom';
+import ViewMaterial from './material/viewMaterial';
+import UpdateMaterial from './material/updateMaterial';
+import UploadAssignment from './assignment/uploadAssignment';
 import CreateClassroom from './classroom/createClassroom';
 import ViewClassroom from './classroom/viewClassroom';
-
 
 function App() {
 
@@ -31,19 +33,30 @@ function App() {
           <Route exact path='/errorPage' element={<ErrorPage />} ></Route>
 
           <Route path='/auth' >
-            <Route exact path='/auth/login' element={isLoggedIn ? <Navigate to="/" /> : < Login />}></Route>
+            {/* <Route exact path='/auth/login' element={isLoggedIn ? <Navigate to="/" /> : < Login />}></Route> */}
+            <Route exact path='/auth/login' element={< Login />}></Route> 
             <Route exact path='/auth/register' element={isLoggedIn ? user.role === RoleName.ADMIN ? < Registration /> : < ErrorPage /> : <Navigate to="/" />}></Route>
             <Route exect path={'/auth/update/:id'} element={isLoggedIn ? user.role === RoleName.ADMIN ? <UpdateUser /> : < ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/allStudents' element={isLoggedIn ? user.role === RoleName.ADMIN ? <AllStudentsList /> : <ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/allProfessors' element={isLoggedIn ? user.role === RoleName.ADMIN ? <AllProfessorsList /> : <ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/profile' element={isLoggedIn ? <Profile /> : <Navigate to="/" />}></Route>
-            <Route exact path='/auth/material/:userId' element={<Material />} ></Route>
           </Route>
 
           <Route path='/classroom' >
             <Route exact path='/classroom/joinClassroom' element={isLoggedIn ? < JoinClassroom /> : < Login />}></Route>
+          </Route>
+
+          <Route path='/material' >
+            <Route exact path='/material/uploadMaterial/:user_Id' element={<Material />} ></Route>
+            <Route exact path='/material/viewMaterial/:user_Id' element={<ViewMaterial />} ></Route>
+            <Route exact path='/material/update/:MaterialId' element={<UpdateMaterial />} ></Route>
+          </Route>
+
+          <Route path='/assignment' >
+            <Route exact path='/assignment/uploadAssignment/:user_Id' element={<UploadAssignment />}></Route>
             <Route exact path='/classroom/createClassroom' element={isLoggedIn ?  user.role === RoleName.PROFESSOR ? < CreateClassroom /> : <ErrorPage /> : < Login />}></Route>
             <Route exact path='/classroom/viewClassroom/:class_id' element={isLoggedIn ? < ViewClassroom /> : < Login />}></Route>
+
           </Route>
 
 
