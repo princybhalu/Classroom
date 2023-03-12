@@ -8,17 +8,17 @@
 const mongoose = require("mongoose");
 
 const AssigmentSchema = new mongoose.Schema({
-    userId:{
+    user_Id:{
         type: String,
-        // require: true
+        require: true
     },
     classid:{
         type : String,
-        // require: true
+        require: true
     },
     Title:{
         type:String,
-        // require: true
+        require: true
     },
     Instructions:{
         type: String,

@@ -14,6 +14,7 @@ import Material from './material/uploadMaterial';
 import JoinClassroom from './classroom/joinClassroom';
 import ViewMaterial from './material/viewMaterial';
 import UpdateMaterial from './material/updateMaterial';
+import UploadAssignment from './assignment/uploadAssignment';
 
 function App() {
 
@@ -44,10 +45,13 @@ function App() {
           </Route>
 
           <Route path='/material' >
-            <Route exact path='/material/uploadMaterial/:userId' element={<Material />} ></Route>
-            <Route exact path='/material/viewMaterial/:userId' element={<ViewMaterial />} ></Route>
+            <Route exact path='/material/uploadMaterial/:user_Id' element={<Material />} ></Route>
+            <Route exact path='/material/viewMaterial/:user_Id' element={<ViewMaterial />} ></Route>
             <Route exact path='/material/update/:MaterialId' element={<UpdateMaterial />} ></Route>
-            
+          </Route>
+
+          <Route path='/assignment' >
+            <Route exact path='/assignment/uploadAssignment/:user_Id' element={<UploadAssignment />}></Route>
           </Route>
 
 
