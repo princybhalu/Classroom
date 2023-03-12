@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from "react-router";
 import { UploadMaterial } from '../services/materialApis';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 //import env from "react-dotenv";
 // const dotenv = require('dotenv');
 // import dotenv.config 
@@ -14,9 +15,11 @@ import { useState } from 'react';
 
 function Material(props) {
 
-    let {userId} = useParams();
+    // let {userId} = useParams();
 
-    console.log(userId);
+    const user = useSelector(state => state.user);
+
+    // console.log(userId);
 
     const today = new Date();
 
@@ -64,7 +67,7 @@ function Material(props) {
             console.log(urlData);
 
             const RequestBody = {
-                userId : userId,
+                user_Id : user._id,
                 Title : values.title,
                 Description : values.description,
                 Attach : urlData,

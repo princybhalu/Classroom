@@ -1,28 +1,71 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { viewMaterialApiCall } from '../services/materialApis';
-import { Image } from 'cloudinary-react';
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router";
+import { Button, Backdrop, Box, Modal, Fade, Typography, TextField, Card, CardContent, TableContainer, TableBody, TableHead, TableRow, Paper, Table } from '@mui/material';
+import { DeleteMatrialApiCall } from '../services/materialApis';
+import { useSelector } from 'react-redux';
 
 
-export default function ViewMaterial() {
+function ViewMaterial() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [Material, SetMaterial] = useState([]);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [open, setOpen] = useState(false);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [deleteMatrial, SetDeteleMaterial] = useState({});
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [isDisableDeleteBtn, SetisDisableDeleteBtn] = useState(1);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const navigate = useNavigate();
+
+  const user = useSelector(state => state.user);
+
+  const handleOpen = () => setOpen(true);
+
+  // useEffect(() => {
+  //   if(deleteMatrial !== {})
+  //     DeleteMatrialCall(deleteMatrial);
+  //     console.log(deleteMatrial);
+  // },[deleteMatrial])
+
+  const DeleteMatrialCall = async (deleteMatrial) => {
+    console.log('delete Matrial');
+    console.log(deleteMatrial)
+
+    try{
+      const requestBody = {
+        user_Id : user._id
+      }
+      console.log(requestBody);
+
+      const res = await DeleteMatrialApiCall(deleteMatrial,requestBody)
+
+      if (res.status === 200) {
+        toast.success(res.data);
+        console.log(res.data);
+        SetDeteleMaterial({});
+        setOpen(false);
+        SetisDisableDeleteBtn(1);
+        navigate('/auth/allStudents');
+    }
+    } catch (err) {
+
+        // console.log(err.res.status);
+        toast.error(err.message);
+        console.log(err.message);
+    }
+  }
 
   const requestBody = {
     Classid : "63c0fb0683a0bbaf03ba50a7"
   }
 
-  viewMaterialApiCall(requestBody).then((result) => {console.log(result) ; SetMaterial(result);}).catch((err) => {console.error(err)});
-  console.log(Material)
-
-//   var html = '<table id="matrial">';
-//   for(let i=0 ; i<Material.length ; i++){
-//     html += '<tr>';
-//     for(let j=0 ; j<Material[i].length ; j++){
-//         html += '<td>' + M + '</td>';
-//     }
-//   }
+  viewMaterialApiCall(requestBody).then((result) => { SetMaterial(result);}).catch((err) => {console.error(err)});
+  // console.log(Material)
 
   return (
     <>
@@ -34,19 +77,18 @@ export default function ViewMaterial() {
             <a href={material.Attach} target="_blank" rel="noopener noreferrer">
                 <img src={`https://res.cloudinary.com/djj0dl6dz/image/fetch/f_auto,q_auto:good,c_limit,h_200,w_200/${material.Attach}#page=1`} style={{ border: '1px solid black' }} alt="PDF Front Page" />
             </a>
+            <h4>{material._id}</h4>
+            <Button onClick={async () => { await SetDeteleMaterial(material); console.log(deleteMatrial); DeleteMatrialCall(material._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
+              Delete
+            </Button>
             <br/>
+
         </>
       ))}
     </>
 
-    // <>
-    //     <div>
-    //         <div dangerouslySetInnerHTML={createMarkup(html)} />
-    //     </div>
-    // </>
+
   )
 }
 
-// function createMarkup(html1) {
-//     return { __html: html1 };
-// }
+export default ViewMaterial

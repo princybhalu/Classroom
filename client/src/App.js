@@ -29,7 +29,8 @@ function App() {
           <Route exact path='/errorPage' element={<ErrorPage />} ></Route>
 
           <Route path='/auth' >
-            <Route exact path='/auth/login' element={isLoggedIn ? <Navigate to="/" /> : < Login />}></Route>
+            {/* <Route exact path='/auth/login' element={isLoggedIn ? <Navigate to="/" /> : < Login />}></Route> */}
+            <Route exact path='/auth/login' element={< Login />}></Route> 
             <Route exact path='/auth/register' element={isLoggedIn ? user.role === RoleName.ADMIN ? < Registration /> : < ErrorPage /> : <Navigate to="/" />}></Route>
             <Route exect path={'/auth/update/:id'} element={isLoggedIn ? user.role === RoleName.ADMIN ? <UpdateUser /> : < ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/allStudents' element={isLoggedIn ? user.role === RoleName.ADMIN ? <AllStudentsList /> : <ErrorPage /> : <Navigate to="/" />} ></Route>
