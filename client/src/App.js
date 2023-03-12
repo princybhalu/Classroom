@@ -15,6 +15,8 @@ import JoinClassroom from './classroom/joinClassroom';
 import ViewMaterial from './material/viewMaterial';
 import UpdateMaterial from './material/updateMaterial';
 import UploadAssignment from './assignment/uploadAssignment';
+import CreateClassroom from './classroom/createClassroom';
+import ViewClassroom from './classroom/viewClassroom';
 
 function App() {
 
@@ -52,6 +54,9 @@ function App() {
 
           <Route path='/assignment' >
             <Route exact path='/assignment/uploadAssignment/:user_Id' element={<UploadAssignment />}></Route>
+            <Route exact path='/classroom/createClassroom' element={isLoggedIn ?  user.role === RoleName.PROFESSOR ? < CreateClassroom /> : <ErrorPage /> : < Login />}></Route>
+            <Route exact path='/classroom/viewClassroom/:class_id' element={isLoggedIn ? < ViewClassroom /> : < Login />}></Route>
+
           </Route>
 
 

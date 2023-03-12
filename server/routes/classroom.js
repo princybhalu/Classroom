@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Classroom = require("../models/Classroom");
+const User = require("../models/User");
 
 // Create Classroom
 // update
@@ -27,16 +28,20 @@ router.post("/createclass",async(req,res)=>{
             Subject: req.body.Subject,
             Department: req.body.Department,
             Classname: req.body.Classname,
-            Teacher: req.body.Teacher,
+            Professor_id: req.body.Professor_id,
+            Professor_name: req.body.Professor_name,
+            Subtitle: req.body.Subtitle ,
             ClassActiveStatus: true 
         });
         const Class = await newClass.save();
-        res.status(200).json(Class);
+        const user = await User.findById(req.body.Professor_id);
+        await user.updateOne({ $push: { classid: Class._id } });
+        res.status(200).json(Class._id);
     }catch(err){
         res.status(500).json(err);
+        console.log(err);
     }
 });
-
 
 //Update Classroom
 router.put("/updateclass/:id",async(req,res)=>{
@@ -48,7 +53,6 @@ router.put("/updateclass/:id",async(req,res)=>{
         res.status(500).json(err);
     }
 });
-
 
 //Inactive Classroom
 router.put("/Inactiveclass/:id",async(req,res)=>{
@@ -65,12 +69,28 @@ router.put("/Inactiveclass/:id",async(req,res)=>{
     }
 });
 
-
-//Get Classroom by id 
+//Get Classroom by class id 
 router.get("/getclass/:id",async(req,res)=>{
     try{
         const getClassroom = await Classroom.findById(req.params.id);
         res.status(200).json(getClassroom);
+    }catch(err){
+        res.status(500).json(err);
+    }
+});
+
+// Get Classroom list by user id
+router.get("/getClassroomList/:id",async(req,res)=>{
+    try{
+        const currentUser = await User.findById(req.params.id);
+        const classes = await Promise.all(
+            currentUser.classid.map(async(id)=>{
+                let getClassroom = await Classroom.findById(id);
+                return (getClassroom)
+            })
+        )
+        res.status(200).json(classes);
+
     }catch(err){
         res.status(500).json(err);
     }

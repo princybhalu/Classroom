@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Assignment = require("../models/Assignment");
+const upload = require("../middleware/upload");
+
 
 //Create Assignment
 //Edit Assignment
@@ -8,18 +10,25 @@ const Assignment = require("../models/Assignment");
 //Delete Assignment
 
 //Create Assignment
-router.post("/createassignment", async(req,res)=>{
+router.post("/createassignment",upload.array('Attach[]') ,async(req,res)=>{
     try{
         const newAssignment = new Assignment({
             userId : req.body.userId,
             classid : req.body.classid,
             Title : req.body.Title,
             Instructions : req.body.Instructions,
-            Topic : req.body.Topic,
             Points: req.body.Points,
             DueDate: req.body.DueDate,
-            Attach : req.body.Attach
+            // Attach : req.body.Attach
         });
+        if(req.files){
+            let path = ''
+            req.files.forEach(function(files,index,arr){
+                path = path + files.path + ','
+            })
+            path = path.substring(0, path.lastIndexOf(","))
+            newMaterial.Attach = path
+        }
         const saveAssignment = await newAssignment.save();
         res.status(200).json(saveAssignment);
     }catch(err){

@@ -1,11 +1,19 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
 import Navbar from '../components/dashboard/navbar';
-import { Box, Button, Container, Typography, TextField } from '@mui/material';
+import { Box, Button, Typography, TextField } from '@mui/material';
 import '../css/classroom.css';
-import { width } from '@mui/system';
+import { useSelector } from 'react-redux';
+import { JoinClassroomApiCall } from '../services/userApis';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 
 function JoinClassroom() {
+
+    const user = useSelector(state => state.user);
+    const navigate = useNavigate();
+
 
     const [disableBtn, SetdisableBtn] = useState(true);
     const [InputAsClassCode , SetInputAsClassCode ] = useState();
@@ -19,10 +27,24 @@ function JoinClassroom() {
         }
     }
 
-    const OnSubmit = () => {
-        // const requestBody = {
-        //     user_id : 
-        // }
+    const OnSubmit = async () => {
+
+        const requestBody = {
+            user_id : user._id ,
+            class_code : InputAsClassCode
+        }
+
+        try{
+            const res = await JoinClassroomApiCall(requestBody);
+            if(res.status === 200){
+                toast.success("Join Classroom Successfullly");
+                navigate("/");
+            }
+        }catch(err){
+            toast.error(err.message);
+            console.log(err);
+        }
+
     }
 
     return (
