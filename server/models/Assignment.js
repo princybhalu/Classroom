@@ -16,7 +16,7 @@ const AssigmentSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    classid:{
+    Classid:{
         type : String,
         require: true
     },
@@ -28,10 +28,6 @@ const AssigmentSchema = new mongoose.Schema({
         type: String,
         // default: ""
     },
-    Title:{
-        type: String,
-        // default: ""
-    },
     Points:{
         type: Number,
         default: 100,
@@ -40,7 +36,7 @@ const AssigmentSchema = new mongoose.Schema({
     },
     DueDate:{
         type: Date,
-        default: result   
+        default: result
     },
     Attach:{
         type: String,

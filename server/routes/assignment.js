@@ -10,25 +10,17 @@ const upload = require("../middleware/upload");
 //Delete Assignment
 
 //Create Assignment
-router.post("/createassignment",upload.array('Attach[]') ,async(req,res)=>{
+router.post("/createassignment",async(req,res)=>{
     try{
         const newAssignment = new Assignment({
-            userId : req.body.userId,
-            classid : req.body.classid,
+            user_Id : req.body.user_Id,
+            Classid : req.body.Classid,
             Title : req.body.Title,
             Instructions : req.body.Instructions,
             Points: req.body.Points,
             DueDate: req.body.DueDate,
-            // Attach : req.body.Attach
+            Attach : req.body.Attach
         });
-        if(req.files){
-            let path = ''
-            req.files.forEach(function(files,index,arr){
-                path = path + files.path + ','
-            })
-            path = path.substring(0, path.lastIndexOf(","))
-            newMaterial.Attach = path
-        }
         const saveAssignment = await newAssignment.save();
         res.status(200).json(saveAssignment);
     }catch(err){

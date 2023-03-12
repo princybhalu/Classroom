@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { GetClassroomByClassidApiCall } from '../services/classroomApis';
 import ViewMaterial from '../material/viewMaterial';
 import Material from '../material/uploadMaterial';
+import UploadAssignment from '../assignment/uploadAssignment';
 
 function ViewClassroom() {
 
@@ -15,6 +16,7 @@ function ViewClassroom() {
     <>
     <ViewMaterial class_id={class_id} />
     <Material class_id={class_id} />
+    <UploadAssignment class_id={class_id} />
      </>
   )
 }

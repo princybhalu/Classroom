@@ -7,19 +7,10 @@ import { useNavigate, useParams } from "react-router";
 import { UploadMaterial } from '../services/materialApis';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-//import env from "react-dotenv";
-// const dotenv = require('dotenv');
-// import dotenv.config 
-
-
 
 function Material(props) {
 
-    // let {userId} = useParams();
-
     const user = useSelector(state => state.user);
-
-    // console.log(userId);
 
     const today = new Date();
 
