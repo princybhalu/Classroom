@@ -67,7 +67,7 @@ function ViewMaterial(props) {
             <Button onClick={async () => {DeleteMatrialCall(material._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
               Delete
             </Button>
-            <Button onClick={() => { navigate('/updateMaterial/update/' + material._id) }} variant="contained" sx={{ marginRight: '5px' }}>
+            <Button onClick={() => { navigate('/material/updateMaterial/' + material._id) }} variant="contained" sx={{ marginRight: '5px' }}>
               Edit
             </Button>
             </>}

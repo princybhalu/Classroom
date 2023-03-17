@@ -19,3 +19,16 @@ export const DeleteAssignmentApiCall = async (id,rbody) => {
     return res;
 
 }
+
+export const GetOneAssignmentApiCall = async (id) => {
+
+    const res = await axios.get('/assignment/getOneAssignment/'+id);
+    return res.data;
+
+}
+
+export const UpdateAssignmentApiCall = async (id,rbody) => {
+
+    const res = await axios.put('/assignment/editassignment/' + id , rbody);
+    return res;
+}

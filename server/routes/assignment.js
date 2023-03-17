@@ -69,5 +69,15 @@ router.post("/delete/:id",async(req,res)=>{
     }
 })
 
+//get one Assignment
+router.get("/getOneAssignment/:id", async(req,res)=>{
+    try{
+        const viewOneAssignment = await Assignment.findById(req.params.id);
+        res.status(200).json(viewOneAssignment);
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
+
 
 module.exports = router;
