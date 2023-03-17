@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { viewMaterialApiCall } from '../services/materialApis';
+import { viewAssignmentApiCall } from '../services/assignmentApis';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router";
 import { Button, Backdrop, Box, Modal, Fade, Typography, TextField, Card, CardContent, TableContainer, TableBody, TableHead, TableRow, Paper, Table } from '@mui/material';
-import { DeleteMatrialApiCall } from '../services/materialApis';
+import { DeleteAssignmentApiCall } from '../services/assignmentApis';
 import { useSelector } from 'react-redux';
 import { RoleName } from '../model/RoleName';
 
 
-function ViewMaterial(props) {
+function ViewAssignment(props) {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [Material, SetMaterial] = useState([]);
+  const [Assignment, SetAssignment] = useState([]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
 
   const user = useSelector(state => state.user);
 
-  const DeleteMatrialCall = async (deleteMatrial) => {
-    console.log('delete Matrial');
-    console.log(deleteMatrial)
+  const DeleteAssignmentCall = async (deleteAssignment) => {
+    console.log('delete Assignment');
+    console.log(deleteAssignment)
 
     try{
       const requestBody = {
@@ -29,12 +29,12 @@ function ViewMaterial(props) {
       }
       console.log(requestBody);
 
-      const res = await DeleteMatrialApiCall(deleteMatrial,requestBody)
+      const res = await DeleteAssignmentApiCall(deleteAssignment,requestBody)
 
       if (res.status === 200) {
         toast.success(res.data);
         console.log(res.data);
-        navigate('/auth/allStudents');
+        // navigate('/classroom/viewClassroom/:class_id');
     }
     } catch (err) {
 
@@ -48,26 +48,26 @@ function ViewMaterial(props) {
     Classid : props.class_id 
   }
 
-  viewMaterialApiCall(requestBody).then((result) => { SetMaterial(result);}).catch((err) => {console.error(err)});
+  viewAssignmentApiCall(requestBody).then((result) => { SetAssignment(result);}).catch((err) => {console.error(err)});
   // console.log(Material)
 
   return (
     <>
-      {Material.map((material) => (
+      {Assignment.map((assignment) => (
         <>
-            <h4>{material.Title}</h4>
-            <h4>{material.Description}</h4>
+            <h3>{assignment.Title}</h3>
+            <h3>{assignment.Instructions}</h3>
             
-            <a href={material.Attach} target="_blank" rel="noopener noreferrer">
-                <img src={`https://res.cloudinary.com/djj0dl6dz/image/fetch/f_auto,q_auto:good,c_limit,h_200,w_200/${material.Attach}#page=1`} style={{ border: '1px solid black' }} alt="PDF Front Page" />
+            <a href={assignment.Attach} target="_blank" rel="noopener noreferrer">
+                <img src={`https://res.cloudinary.com/djj0dl6dz/image/fetch/f_auto,q_auto:good,c_limit,h_200,w_200/${assignment.Attach}#page=1`} style={{ border: '1px solid black' }} alt="PDF Front Page" />
             </a>
             <br/>
             {/* <h4>{material._id}</h4> */}
             {user.role === RoleName.PROFESSOR && <> 
-            <Button onClick={async () => {DeleteMatrialCall(material._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
+            <Button onClick={async () => {DeleteAssignmentCall(assignment._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
               Delete
             </Button>
-            <Button onClick={() => { navigate('/updateMaterial/update/' + material._id) }} variant="contained" sx={{ marginRight: '5px' }}>
+            <Button onClick={() => { navigate('/assignment/updateAssignment/' + assignment._id) }} variant="contained" sx={{ marginRight: '5px' }}>
               Edit
             </Button>
             </>}
@@ -82,4 +82,4 @@ function ViewMaterial(props) {
   )
 }
 
-export default ViewMaterial
+export default ViewAssignment

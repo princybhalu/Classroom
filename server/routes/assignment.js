@@ -22,6 +22,7 @@ router.post("/createassignment",async(req,res)=>{
             Attach : req.body.Attach
         });
         const saveAssignment = await newAssignment.save();
+        console.log(saveAssignment);
         res.status(200).json(saveAssignment);
     }catch(err){
         res.status(500).json(err);
@@ -43,9 +44,9 @@ router.put("/editassignment/:id",async(req,res)=>{
 });
 
 //View Assignment
-router.get("/view/:id",async(req,res)=>{
+router.post("/viewAssignment",async(req,res)=>{
     try{
-        const ViewAssignment = await Assignment.findById(req.params.id);
+        const ViewAssignment = await Assignment.find({Classid : req.body.Classid});
         res.status(200).json(ViewAssignment);
     }catch(err){
         res.status(500).json(err);
@@ -53,7 +54,7 @@ router.get("/view/:id",async(req,res)=>{
 });
 
 //Delete Assignment
-router.delete("/delete/:id",async(req,res)=>{
+router.post("/delete/:id",async(req,res)=>{
     try{
         const DeleteAssignment = await Assignment.findById(req.params.id);
         if(DeleteAssignment.userId === req.body.userId){

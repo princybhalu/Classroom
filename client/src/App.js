@@ -17,6 +17,8 @@ import UpdateMaterial from './material/updateMaterial';
 import UploadAssignment from './assignment/uploadAssignment';
 import CreateClassroom from './classroom/createClassroom';
 import ViewClassroom from './classroom/viewClassroom';
+import ViewAssignment from './assignment/viewAssignment';
+import UpdateAssingment from './assignment/updateAssingment';
 
 function App() {
 
@@ -34,7 +36,7 @@ function App() {
 
           <Route path='/auth' >
             {/* <Route exact path='/auth/login' element={isLoggedIn ? <Navigate to="/" /> : < Login />}></Route> */}
-            <Route exact path='/auth/login' element={< Login />}></Route> 
+            <Route exact path='/auth/login' element={<Login />}></Route> 
             <Route exact path='/auth/register' element={isLoggedIn ? user.role === RoleName.ADMIN ? < Registration /> : < ErrorPage /> : <Navigate to="/" />}></Route>
             <Route exect path={'/auth/update/:id'} element={isLoggedIn ? user.role === RoleName.ADMIN ? <UpdateUser /> : < ErrorPage /> : <Navigate to="/" />} ></Route>
             <Route exact path='/auth/allStudents' element={isLoggedIn ? user.role === RoleName.ADMIN ? <AllStudentsList /> : <ErrorPage /> : <Navigate to="/" />} ></Route>
@@ -52,11 +54,13 @@ function App() {
           <Route path='/material' >
             <Route exact path='/material/uploadMaterial/:user_Id' element={<Material />} ></Route>
             <Route exact path='/material/viewMaterial/:user_Id' element={<ViewMaterial />} ></Route>
-            <Route exact path='/material/update/:MaterialId' element={<UpdateMaterial />} ></Route>
+            <Route exact path='/material/updateMaterial/:MaterialId' element={<UpdateMaterial />} ></Route>
           </Route>
 
           <Route path='/assignment' >
             <Route exact path='/assignment/uploadAssignment/:user_Id' element={<UploadAssignment />}></Route>
+            <Route exact path='/assignment/viewAssignment/:user_Id' element={<ViewAssignment />}></Route>
+            <Route exact path='/assignment/updateAssignment/:AssignmentId' element={<UpdateAssingment />}></Route>
           </Route>
 
 

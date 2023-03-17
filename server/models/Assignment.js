@@ -38,6 +38,9 @@ const AssigmentSchema = new mongoose.Schema({
         type: Date,
         default: result
     },
+    StudentSubmition: {
+        type: Array,
+    },
     Attach:{
         type: String,
     }
