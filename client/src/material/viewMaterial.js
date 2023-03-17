@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { Button, Backdrop, Box, Modal, Fade, Typography, TextField, Card, CardContent, TableContainer, TableBody, TableHead, TableRow, Paper, Table } from '@mui/material';
 import { DeleteMatrialApiCall } from '../services/materialApis';
 import { useSelector } from 'react-redux';
+import { RoleName } from '../model/RoleName';
 
 
 function ViewMaterial(props) {
@@ -60,13 +61,15 @@ function ViewMaterial(props) {
             <a href={material.Attach} target="_blank" rel="noopener noreferrer">
                 <img src={`https://res.cloudinary.com/djj0dl6dz/image/fetch/f_auto,q_auto:good,c_limit,h_200,w_200/${material.Attach}#page=1`} style={{ border: '1px solid black' }} alt="PDF Front Page" />
             </a>
-            <h4>{material._id}</h4>
+            {/* <h4>{material._id}</h4> */}
+            {user.role === RoleName.PROFESSOR && <> 
             <Button onClick={async () => {DeleteMatrialCall(material._id);}} variant="contained" color='error' sx={{ marginRight: '5px' }}>
               Delete
             </Button>
             <Button onClick={() => { navigate('/material/update/' + material._id) }} variant="contained" sx={{ marginRight: '5px' }}>
               Edit
             </Button>
+            </>}
             <br/>
 
         </>
