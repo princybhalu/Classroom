@@ -6,6 +6,8 @@ import ViewMaterial from '../material/viewMaterial';
 import Material from '../material/uploadMaterial';
 import { useSelector } from 'react-redux';
 import CampaignRoundedIcon from '@mui/icons-material/CampaignRounded';
+import UploadAssignment from '../assignment/uploadAssignment';
+import { RoleName } from '../model/RoleName';
 
 function Streamofclassroom(props) {
 
@@ -31,18 +33,30 @@ function Streamofclassroom(props) {
                         </div>
                     </div>
 
+
                     <div className='row mt-2'>
                         <div className='col-2'>
-                            <div className="card">
+                            {/* Class Code  */}
+                            {user.role === RoleName.PROFESSOR && <>  <div className="card">
                                 <div className="card-body">
                                     <h6 className="card-text">Class code</h6>
                                     <h4 className="card-title" style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>{props.classroom.Classcode}</h4>
                                 </div>
+                            </div></>}
+
+                            {/* For Student ... this part is reaming  */}
+                            {user.role === RoleName.STUDENT && <><div className="card">
+                                <div className="card-body">
+                                    <h6 className="card-text">greeting</h6>
+                                    <h4 className="card-title" style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>Hello Buddy...:</h4>
+                                </div>
                             </div>
+                            </>}
+
                         </div>
 
                         <div className='col-10'>
-                            <div class="card">
+                            {user.role === RoleName.PROFESSOR && <>   <div class="card">
                                 {
                                     openUplaodForm === 0 ? <>
                                         <Button onClick={() => SetopenUplaodForm(1)}>
@@ -51,7 +65,7 @@ function Streamofclassroom(props) {
                                                     <div className='col-1' style={{ paddingLeft: '20px' }}>
                                                         <CampaignRoundedIcon sx={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], fontSize: '30px' }} />
                                                     </div>
-                                                    <div className='col announce-title' sx={{ fontSize: '20px' ,  color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>
+                                                    <div className='col announce-title' sx={{ fontSize: '20px', color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>
                                                         Announce something to your class
                                                     </div>
                                                 </div>
@@ -65,12 +79,14 @@ function Streamofclassroom(props) {
                                                     <FormControlLabel value="Material" checked={whichYouWantToPost === 'Material'} control={<Radio />} label="Material" />
                                                     <FormControlLabel value="Assigment" control={<Radio />} label="Assigment" />
                                                 </RadioGroup>
-                                                {whichYouWantToPost === 'Material' ? <Material class_id={props.classroom._id} SetopenUplaodFormCallBack={SetopenUplaodForm} /> : <></>}
+                                                {whichYouWantToPost === 'Material' ? <Material class_id={props.classroom._id} SetopenUplaodFormCallBack={SetopenUplaodForm} /> : <><UploadAssignment class_id={props.classroom._id} SetopenUplaodFormCallBack={SetopenUplaodForm} /></>}
                                             </div>
 
                                         </>
                                 }
                             </div>
+                            </>}
+
 
                             <ViewMaterial class_id={props.classroom._id} />
                         </div>

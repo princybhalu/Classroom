@@ -154,7 +154,7 @@ function Material(props) {
                             <Button color="primary" disabled={formik.isSubmitting} size="large" type="submit" sx={{ marginRight: '5px' }} variant="contained" >
                                 Post
                             </Button>
-                            {/* Submit btn */}
+                            {/* Cancle btn */}
                             <Button color="error" onClick={() => props.SetopenUplaodFormCallBack(0) } size="large" type="submit" variant="contained" >
                                 Cancle
                             </Button>

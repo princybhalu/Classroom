@@ -18,7 +18,7 @@ export default function UploadAssignment(props) {
 
     const navigate = useNavigate();
 
-    const [file,fileChange] = useState();
+    const [file, fileChange] = useState();
 
     // form controller
     const formik = useFormik({
@@ -26,14 +26,14 @@ export default function UploadAssignment(props) {
         // intial values
         initialValues: {
             Title: '',
-            Instructions : '',
+            Instructions: '',
             Points: 0,
-            Attach : '',
-            DueDate : today,
+            Attach: '',
+            DueDate: today,
         },
 
         // To check enter value is vaild or not 
-        validationSchema: Yup.object({   
+        validationSchema: Yup.object({
             Title: Yup.string().required("Title is required"),
             // discription: Yup.string().required("Description is required"),
         }),
@@ -46,19 +46,19 @@ export default function UploadAssignment(props) {
             console.log(file)
             formData.append("file", file);
             formData.append("upload_preset", "classroom_preset");
-            
-                const response = await fetch(
-                    `https://api.cloudinary.com/v1_1/djj0dl6dz/image/upload`,
-                    {
-                        method: "post",
-                        body: formData,
-                    }
-                );
+
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/djj0dl6dz/image/upload`,
+                {
+                    method: "post",
+                    body: formData,
+                }
+            );
 
             let urlData = await response.json();
             urlData = urlData?.url;
             console.log(urlData);
-            
+
             const dateString = values.DueDate;
             const date1 = new Date(dateString);
             console.log(date1);
@@ -67,13 +67,13 @@ export default function UploadAssignment(props) {
 
             const RequestBody = {
 
-                user_Id : user._id,
-                Title : values.Title,
-                Instructions : values.Instructions,
-                Points : parseInt(values.Points),
-                DueDate : isoDate,
-                Attach : urlData,
-                Classid : props.class_id
+                user_Id: user._id,
+                Title: values.Title,
+                Instructions: values.Instructions,
+                Points: parseInt(values.Points),
+                DueDate: isoDate,
+                Attach: urlData,
+                Classid: props.class_id
             }
 
             try {
@@ -98,20 +98,20 @@ export default function UploadAssignment(props) {
 
     return (
         <>
-        
-             <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
+
+            <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
                 <Container>
-                    
+
                     {/* <form onSubmit={formik.handleSubmit} action="/uploadphoto" enctype="multipart/form-data" method="POST" > */}
                     <form onSubmit={formik.handleSubmit}>
-                        <Box sx={{ my: 3 }}>
+                        {/* <Box sx={{ my: 3 }}>
                             <Typography color="textPrimary" variant="h4" > Assigment </Typography>
-                        </Box>
+                        </Box> */}
 
-                        <Grid container spacing={0}> 
+                        <Grid container spacing={2}>
 
 
-                            <Grid item xs={12} md={0} >
+                            <Grid item xs={12} md={4} >
                                 {/* Title */}
                                 <TextField
                                     error={Boolean(formik.touched.Title && formik.errors.Title)}
@@ -125,7 +125,7 @@ export default function UploadAssignment(props) {
                                     value={formik.values.Title}
                                     variant="outlined"
                                 />
-                            </Grid> 
+                            </Grid>
 
                             <Grid item xs={12} md={0} >
                                 {/* Instructions */}
@@ -141,8 +141,8 @@ export default function UploadAssignment(props) {
                                     value={formik.values.Instructions}
                                     variant="outlined"
                                 />
-                            </Grid> 
-                            <Grid item xs={12} md={0} >
+                            </Grid>
+                            <Grid item xs={12} md={4} >
                                 {/* Points */}
                                 <TextField
                                     error={Boolean(formik.touched.Points && formik.errors.Points)}
@@ -156,12 +156,12 @@ export default function UploadAssignment(props) {
                                     value={formik.values.Points}
                                     variant="outlined"
                                 />
-                            </Grid> 
+                            </Grid>
 
-                            <Grid item xs={12} md={0} >
-                            {/* Due Date */}
-                            <TextField
-                                
+                            <Grid item xs={12} md={4} >
+                                {/* Due Date */}
+                                <TextField
+
                                     error={Boolean(formik.touched.DueDate && formik.errors.DueDate)}
                                     fullWidth
                                     helperText={formik.touched.DueDate && formik.errors.DueDate}
@@ -176,36 +176,42 @@ export default function UploadAssignment(props) {
                                     InputLabelProps={{
                                         shrink: true
                                     }}
-                                    />
+                                />
                             </Grid>
 
-                            <Grid>
-                                <input 
-                                  type="file" 
-                                  name="image" 
-                                  accept="image/*"
-                                  value={formik.values.image}
-                                  onBlur={formik.handleBlur}
-                                  onChange={(e) => {formik.handleChange(e) ;
-                                                    fileChange(e.target.files[0])}}
+                            <Grid item xs={12} md={6}>
+                                <input
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    value={formik.values.image}
+                                    onBlur={formik.handleBlur}
+                                    onChange={(e) => {
+                                        formik.handleChange(e);
+                                        fileChange(e.target.files[0])
+                                    }}
                                 />
-                                
-                            </Grid> 
 
-
-
-                            <Box sx={{ py: 2 }}>
-                                {/* Submit btn */}
-                                <Button color="primary" disabled={formik.isSubmitting} fullWidth size="large" type="submit" variant="contained" >
-                                    Post
-                                </Button>
-                            </Box>
+                            </Grid>
                         </Grid>
+
+
+                        <Box sx={{ py: 2 }}>
+                            {/* Submit btn */}
+                            <Button color="primary" disabled={formik.isSubmitting} size="large" sx={{ marginRight: '5px' }} type="submit" variant="contained" >
+                                Post
+                            </Button>
+                            {/* Cancle btn */}
+                            <Button color="error" onClick={() => props.SetopenUplaodFormCallBack(0)} size="large" type="submit" variant="contained" >
+                                Cancle
+                            </Button>
+                        </Box>
+
                     </form>
-                    
-    
+
+
                 </Container>
-            </Box>            
+            </Box>
         </>
     );
 }
