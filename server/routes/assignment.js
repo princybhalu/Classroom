@@ -10,26 +10,19 @@ const upload = require("../middleware/upload");
 //Delete Assignment
 
 //Create Assignment
-router.post("/createassignment",upload.array('Attach[]') ,async(req,res)=>{
+router.post("/createassignment",async(req,res)=>{
     try{
         const newAssignment = new Assignment({
-            userId : req.body.userId,
-            classid : req.body.classid,
+            user_Id : req.body.user_Id,
+            Classid : req.body.Classid,
             Title : req.body.Title,
             Instructions : req.body.Instructions,
             Points: req.body.Points,
             DueDate: req.body.DueDate,
-            // Attach : req.body.Attach
+            Attach : req.body.Attach
         });
-        if(req.files){
-            let path = ''
-            req.files.forEach(function(files,index,arr){
-                path = path + files.path + ','
-            })
-            path = path.substring(0, path.lastIndexOf(","))
-            newMaterial.Attach = path
-        }
         const saveAssignment = await newAssignment.save();
+        console.log(saveAssignment);
         res.status(200).json(saveAssignment);
     }catch(err){
         res.status(500).json(err);
@@ -51,9 +44,9 @@ router.put("/editassignment/:id",async(req,res)=>{
 });
 
 //View Assignment
-router.get("/view/:id",async(req,res)=>{
+router.post("/viewAssignment",async(req,res)=>{
     try{
-        const ViewAssignment = await Assignment.findById(req.params.id);
+        const ViewAssignment = await Assignment.find({Classid : req.body.Classid});
         res.status(200).json(ViewAssignment);
     }catch(err){
         res.status(500).json(err);
@@ -61,7 +54,7 @@ router.get("/view/:id",async(req,res)=>{
 });
 
 //Delete Assignment
-router.delete("/delete/:id",async(req,res)=>{
+router.post("/delete/:id",async(req,res)=>{
     try{
         const DeleteAssignment = await Assignment.findById(req.params.id);
         if(DeleteAssignment.userId === req.body.userId){
@@ -71,6 +64,16 @@ router.delete("/delete/:id",async(req,res)=>{
         else{
             res.status(400).json("You can not delete this assignment.");
         }
+    }catch(err){
+        res.status(500).json(err);
+    }
+})
+
+//get one Assignment
+router.get("/getOneAssignment/:id", async(req,res)=>{
+    try{
+        const viewOneAssignment = await Assignment.findById(req.params.id);
+        res.status(200).json(viewOneAssignment);
     }catch(err){
         res.status(500).json(err);
     }

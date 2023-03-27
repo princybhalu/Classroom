@@ -18,7 +18,7 @@ export const DeleteMatrialApiCall = async (id,rbody) => {
 }
 
 export const UpdateMaterialApiCall = async (id,rbody) => {
-    const res = await axios.put('/material/edit/' + id , rbody);
+    const res = await axios.put('/material/editassignment/' + id , rbody);
     return res;
 }
 

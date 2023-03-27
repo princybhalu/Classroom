@@ -5,8 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { GetOneMaterialApiCall } from "../services/materialApis";
-import { UpdateMaterialApiCall } from "../services/materialApis";
+import { GetOneAssignmentApiCall } from "../services/assignmentApis";
+import { UpdateAssignmentApiCall } from "../services/assignmentApis";
 import { Formik, Form, Field } from "formik";
 
 const style = {
@@ -22,19 +22,19 @@ const style = {
     p: 4
 };
 
-export default function UpdateMaterial() {
+export default function UpdateAssingment() {
   const user = useSelector((state) => state.user);
 
   const [file, fileChange] = useState();
 
-  let { MaterialId } = useParams();
+  let { AssignmentId } = useParams();
 
-  console.log(MaterialId);
+  console.log(AssignmentId);
 
   const navigate = useNavigate();
 
-  const [material, SetMaterial] = useState({});
-  const [IsSetMaterial , SetIsSetMaterial ] = useState(0);
+  const [assignment, SetAssignment] = useState({});
+  const [IsSetAssignment , SetIsSetAssignment ] = useState(0);
 
   const validationSchema = Yup.object({
     title: Yup.string().required('Title is required'),
@@ -48,8 +48,9 @@ export default function UpdateMaterial() {
 //   getOneMaterial();
 
 //   console.log(material);
-    GetOneMaterialApiCall(MaterialId).then((result) => {SetMaterial(result); SetIsSetMaterial(1); });
-    console.log(material)
+    console.log("befor one kahkj")
+    GetOneAssignmentApiCall(AssignmentId).then((result) => {SetAssignment(result); SetIsSetAssignment(1); console.log("result"); });
+    console.log(AssignmentId)
 
   return (
     <>
@@ -61,13 +62,13 @@ export default function UpdateMaterial() {
         <Box sx={style} className="popup-model">
           {/* <div>{material === {} && "Loding..."}</div> */}
 
-          {IsSetMaterial === 0 ? <>Loding...</>
+          {IsSetAssignment === 0 ? <>Loding...</>
           : (
             <>
               <Box sx={{ my: 3 }}>
                 <Typography color="textPrimary" variant="h4" className="Header">
                   {" "}
-                  {material.Title}
+                  {assignment.Title}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom variant="body2">
                   {" "}
@@ -76,9 +77,9 @@ export default function UpdateMaterial() {
               </Box>
               <Formik
                 initialValues={
-                  material !== {} && {
-                    title: material.Title,
-                    description: material.Description,
+                  assignment !== {} && {
+                    title: assignment.Title,
+                    instructions: assignment.Instructions,
                     // title : '',
                     // description: '',
                     Attach: ""
@@ -110,21 +111,21 @@ export default function UpdateMaterial() {
                   const RequestBody = {
                     user_Id: user._id,
                     Title: values.title,
-                    Description: values.description,
+                    Instructions: values.Instructions,
                     Attach: urlData,
                   };
 
                   try {
                     console.log(file);
-                    const response = await UpdateMaterialApiCall(
-                      material._id,
+                    const response = await UpdateAssignmentApiCall(
+                      assignment._id,
                       RequestBody
                     );
 
                     if (response.status === 200) {
-                      toast.success("Material updated Successfully");
+                      toast.success("Assignment updated Successfully");
                       console.log(response.data);
-                      navigate("/material/viewMaterial/" + user._id);
+                      navigate("/assignment/viewAssignment/" + user._id);
                     }
                   } catch (err) {
                     toast.error(err.message);
@@ -164,23 +165,23 @@ export default function UpdateMaterial() {
                         </Grid>
 
                         <Grid item xs={12} md={0}>
-                          {/* Description */}
+                          {/* Instructions */}
                           <TextField
                             error={Boolean(
-                              touched.description &&
-                              errors.description
+                              touched.instructions &&
+                              errors.instructions
                             )}
                             fullWidth
                             helperText={
-                              touched.description &&
-                              errors.description
+                              touched.instructions &&
+                              errors.instructions
                             }
-                            label="Description"
+                            label="Instructions"
                             margin="normal"
-                            name="description"
+                            name="instructions"
                             onBlur={handleBlur}
                             onChange={handleChange}
-                            value={values.description}
+                            value={values.instructions}
                             variant="outlined"
                           />
                         </Grid>
@@ -214,7 +215,7 @@ export default function UpdateMaterial() {
                             <br />
                             <Button
                               onClick={() => {
-                                navigate("/material/viewMaterial/" + user._id);
+                                navigate("/assignment/viewAssignment/" + user._id);
                               }}
                               size="large"
                               variant="contained"
