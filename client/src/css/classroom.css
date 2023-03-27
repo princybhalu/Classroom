@@ -7,3 +7,24 @@
     border-radius: 10px;
     padding-bottom: 15px;
 }
+
+.Container-of-header{
+    margin-left: 0px !important;
+}
+
+.classname-div{
+    width: 10px;
+}
+
+.stream-card-title{
+    margin-top: 220px;
+    font-size: 30px;
+}
+
+.div-of-upload{
+    padding-left: 25px;
+}
+
+.announce-title{
+    color: black;
+}

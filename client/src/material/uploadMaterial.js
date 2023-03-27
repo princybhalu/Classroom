@@ -25,7 +25,7 @@ function Material(props) {
 
     const navigate = useNavigate();
 
-    const [file,fileChange] = useState();
+    const [file, fileChange] = useState();
 
     // form controller
     const formik = useFormik({
@@ -33,13 +33,13 @@ function Material(props) {
         // intial values
         initialValues: {
             title: '',
-            description : '',
-            Attach : '',
-            Classid : '',
+            description: '',
+            Attach: '',
+            Classid: '',
         },
 
         // To check enter value is vaild or not 
-        validationSchema: Yup.object({   
+        validationSchema: Yup.object({
             title: Yup.string().required("Title is required"),
             // discription: Yup.string().required("Description is required"),
         }),
@@ -54,25 +54,25 @@ function Material(props) {
             console.log(file)
             formData.append("file", file);
             formData.append("upload_preset", "classroom_preset");
-            
-                const response = await fetch(
-                    `https://api.cloudinary.com/v1_1/djj0dl6dz/image/upload`,
-                    {
-                        method: "post",
-                        body: formData,
-                    }
-                );
+
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/djj0dl6dz/image/upload`,
+                {
+                    method: "post",
+                    body: formData,
+                }
+            );
 
             let urlData = await response.json();
             urlData = urlData?.url;
             console.log(urlData);
 
             const RequestBody = {
-                user_Id : user._id,
-                Title : values.title,
-                Description : values.description,
-                Attach : urlData,
-                Classid : props.class_id
+                user_Id: user._id,
+                Title: values.title,
+                Description: values.description,
+                Attach: urlData,
+                Classid: props.class_id
             }
 
             try {
@@ -97,17 +97,17 @@ function Material(props) {
 
     return (
         <>
-        
-             <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
+
+            <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
                 <Container>
-                    
+
                     {/* <form onSubmit={formik.handleSubmit} action="/uploadphoto" enctype="multipart/form-data" method="POST" > */}
                     <form onSubmit={formik.handleSubmit}>
-                        <Box sx={{ my: 3 }}>
+                        {/* <Box sx={{ my: 3 }}>
                             <Typography color="textPrimary" variant="h4" > Material </Typography>
-                        </Box>
+                        </Box> */}
 
-                        <Grid container spacing={0}> 
+                        <Grid container spacing={0}>
 
 
                             <Grid item xs={12} md={0} >
@@ -124,7 +124,7 @@ function Material(props) {
                                     value={formik.values.title}
                                     variant="outlined"
                                 />
-                            </Grid> 
+                            </Grid>
 
                             <Grid item xs={12} md={0} >
                                 {/* Description */}
@@ -140,37 +140,42 @@ function Material(props) {
                                     value={formik.values.description}
                                     variant="outlined"
                                 />
-                            </Grid> 
+                            </Grid>
                             <Grid>
-                                <input 
-                                  type="file" 
-                                  name="image" 
-                                  accept="image/*"
-                                  value={formik.values.image}
-                                  onBlur={formik.handleBlur}
-                                  onChange={(e) => {formik.handleChange(e) ;
-                                                    fileChange(e.target.files[0])}}
+                                <input
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    value={formik.values.image}
+                                    onBlur={formik.handleBlur}
+                                    onChange={(e) => {
+                                        formik.handleChange(e);
+                                        fileChange(e.target.files[0])
+                                    }}
                                 />
-                                
-                            </Grid> 
 
+                            </Grid>
 
-
-                            <Box sx={{ py: 2 }}>
-                                {/* Submit btn */}
-                                <Button color="primary" disabled={formik.isSubmitting} fullWidth size="large" type="submit" variant="contained" >
-                                    Post
-                                </Button>
-                            </Box>
                         </Grid>
+
+                        <Box sx={{ py: 2 }}>
+                            {/* Submit btn */}
+                            <Button color="primary" disabled={formik.isSubmitting} size="large" type="submit" sx={{ marginRight: '5px' }} variant="contained" >
+                                Post
+                            </Button>
+                            {/* Submit btn */}
+                            <Button color="error" onClick={() => props.SetopenUplaodFormCallBack(0) } size="large" type="submit" variant="contained" >
+                                Cancle
+                            </Button>
+                        </Box>
                     </form>
-                    
-    
+
+
                 </Container>
-            </Box>            
+            </Box>
         </>
     );
-    
+
 }
 
 export default Material;
