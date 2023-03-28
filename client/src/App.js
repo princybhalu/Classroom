@@ -20,6 +20,7 @@ import ViewClassroom from './classroom/viewClassroom';
 import ViewAssignment from './assignment/viewAssignment';
 import UpdateAssingment from './assignment/updateAssingment';
 import StudentUploadAssignment  from "./assignment/studentUploadAssignment"
+import ViewStudentUploadAssignment from "./assignment/viewStudentUploadAssignment"
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
             <Route exact path='/assignment/viewAssignment/:user_Id' element={<ViewAssignment />}></Route>
             <Route exact path='/assignment/updateAssignment/:AssignmentId' element={<UpdateAssingment />}></Route>
             <Route exact path='/assignment/studentUploadAssignment/:AssignmentId' element={<StudentUploadAssignment />}></Route>
+            <Route exact path='/assignment/viewStudentUploadAssignment/:AssignmentId' element={<ViewStudentUploadAssignment />}></Route>
           </Route>
 
 

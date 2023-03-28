@@ -61,6 +61,7 @@ export default function StudentUploadAssignment() {
             Points: 0,
             Attach: urlData,
             userId : user._id,
+            userUserId : user.userId,
             DateWhenAssign : isoDate
         }
 

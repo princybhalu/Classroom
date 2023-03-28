@@ -23,7 +23,7 @@ function ViewAssignment(props) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
 
-  const [file, fileChange] = useState();
+  // const [file, fileChange] = useState();
 
   const user = useSelector((state) => state.user);
 
@@ -64,23 +64,23 @@ function ViewAssignment(props) {
     });
   // console.log(Material)
 
-  const call = async (id) => {
+  // const call = async (id) => {
 
-    const RequestBody = {
-      // user_Id: user._id,
-      // Points: 0,
-      // Attach: urlData,
-      // Date: isoDate,
-      // Assignment : value,
-      Classid: props.class_id,
-    };
-    // var id = '640dd346b986bcf5889dbbf0'
-    console.log("hello........")
-    const response = await SubmitAssignmentApiCall(id,RequestBody);
-    console.log("hello")
-    console.log(response);
+  //   const RequestBody = {
+  //     // user_Id: user._id,
+  //     // Points: 0,
+  //     // Attach: urlData,
+  //     // Date: isoDate,
+  //     // Assignment : value,
+  //     Classid: props.class_id,
+  //   };
+  //   // var id = '640dd346b986bcf5889dbbf0'
+  //   console.log("hello........")
+  //   const response = await SubmitAssignmentApiCall(id,RequestBody);
+  //   console.log("hello")
+  //   console.log(response);
 
-  }
+  // }
  
 
   // var html = "";
@@ -96,7 +96,7 @@ function ViewAssignment(props) {
     <>
       {/* <div dangerouslySetInnerHTML={createMarkup(html)} /> */}
       {Assignment.map((assignment) => (
-  <>
+    <>
     <h3>{assignment.Title}</h3>
     <h3>{assignment.Instructions}</h3>
     {user.role === RoleName.STUDENT && (
@@ -142,6 +142,15 @@ function ViewAssignment(props) {
           sx={{ marginRight: "5px" }}
         >
           Edit
+        </Button>
+        <Button
+          onClick={() => {
+            navigate("/assignment/viewStudentUploadAssignment/" + assignment._id);
+          }}
+          variant="contained"
+          sx={{ marginRight: "5px" }}
+        >
+          view student upload
         </Button>
       </>
     )}
