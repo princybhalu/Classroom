@@ -208,8 +208,6 @@ export default function UploadAssignment(props) {
                         </Box>
 
                     </form>
-
-
                 </Container>
             </Box>
         </>
