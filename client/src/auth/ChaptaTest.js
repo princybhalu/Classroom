@@ -10,7 +10,7 @@ import {
 
 class CaptchaTest extends Component {
   componentDidMount() {
-    loadCaptchaEnginge(8);
+    loadCaptchaEnginge(6);
   }
 
   doSubmit = () => {
@@ -18,7 +18,7 @@ class CaptchaTest extends Component {
 
     if (validateCaptcha(user_captcha) === true) {
       alert("Captcha Matched");
-      loadCaptchaEnginge(8);
+      loadCaptchaEnginge(6);
       this.props.parentCallbackChaptaTestResult(1);
       this.props.parentCallBackOpenCaptchaTest(false);
       // document.getElementById("user_captcha_input").value = "";

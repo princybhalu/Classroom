@@ -80,16 +80,19 @@ function Navbarofclassroom(props) {
                         </Menu>
                     </Box>
 
+                    {
+                        props.activeLink !== "null" && <> <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            {pages.map((page) => (
+                                <div key={page} >
+                                    {page === 'Stream' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Stream') }} className={props.activeLink === 'Stream' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Stream</Button>}
+                                    {page === 'Classwork' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Classwork') }} className={props.activeLink === 'Classwork' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Classwork</Button>}
+                                    {page === 'People' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('People') }} className={props.activeLink === 'People' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>People</Button>}
+                                </div>
+                            ))}
+                        </Box>
+                        </>
+                    }
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <div key={page} >
-                                {page === 'Stream' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Stream') }} className={props.activeLink === 'Stream' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Stream</Button>}
-                                {page === 'Classwork' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Classwork') }} className={props.activeLink === 'Classwork' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Classwork</Button>}
-                                {page === 'People' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('People') }} className={props.activeLink === 'People' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>People</Button>}
-                            </div>
-                        ))}
-                    </Box>
 
                     {/* Profile Logo */}
                     <Box sx={{ flexGrow: 0 }}>
@@ -113,15 +116,20 @@ function Navbarofclassroom(props) {
                     </Box>
                 </Toolbar>
             </Container>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } , marginLeft: '30%' }}>
-                {pages.map((page) => (
-                    <div key={page} >
-                        {page === 'Stream' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Stream') }} className={props.activeLink === 'Stream' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Stream</Button>}
-                        {page === 'Classwork' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Classwork') }} className={props.activeLink === 'Classwork' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Classwork</Button>}
-                        {page === 'People' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('People') }} className={props.activeLink === 'People' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>People</Button>}
-                    </div>
-                ))}
-            </Box>
+
+            {
+                props.activeLink !== "null" && <>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginLeft: '30%' }}>
+                        {pages.map((page) => (
+                            <div key={page} >
+                                {page === 'Stream' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Stream') }} className={props.activeLink === 'Stream' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Stream</Button>}
+                                {page === 'Classwork' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('Classwork') }} className={props.activeLink === 'Classwork' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>Classwork</Button>}
+                                {page === 'People' && <Button onClick={() => { props.SetOpenWhichComponentCallBack('People') }} className={props.activeLink === 'People' ? "active" : "nonactive"} sx={{ color: 'black', display: 'block' }}>People</Button>}
+                            </div>
+                        ))}
+                    </Box>
+                </>}
+
         </AppBar >
     )
 }

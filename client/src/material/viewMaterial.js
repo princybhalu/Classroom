@@ -54,6 +54,11 @@ function ViewMaterial(props) {
 
   viewMaterialApiCall(requestBody).then((result) => { if (result.length === 0) SetMaterial(-1); else SetMaterial(result); }).catch((err) => { console.error(err) });
 
+  const NevigateToViewMaterial = (id) => {
+    console.log("call in navigate");
+    navigate("/material/viewOneMaterial/" + id + "/" + props.classroom.Classname);
+  }
+
   return (
     <>
 
@@ -61,7 +66,7 @@ function ViewMaterial(props) {
       {props.viewFrom === "Stream" && <>
         {Material.length !== 0 && Material !== -1 && <>  {Material.map((object) => (<>
           <div class="card">
-            <Button >
+            <Button onClick={() => { NevigateToViewMaterial(object.material._id); }} >
               <div class="card-body">
                 <div className='row'>
                   <div className='col-1' style={{ paddingLeft: '20px' }}>
@@ -82,6 +87,35 @@ function ViewMaterial(props) {
                 </div>
               </div>
             </Button></div> </>))}
+        </>}
+
+        {Material.length === 0 && <><Box sx={{ display: 'flex', marginLeft: '50%' }}>
+          <CircularProgress />
+        </Box></>}
+
+        {Material !== -1 && <></>}
+
+      </>}
+
+      {/* Classwork View */}
+      {props.viewFrom === "Classwork" && <>
+        {Material.length !== 0 && Material !== -1 && <>  {Material.map((object) => (<>
+          <Button onClick={() => { NevigateToViewMaterial(object.material._id); }} >
+
+            <div className='row'>
+              <div className='col-1' style={{ paddingLeft: '20px' }}>
+                <div className='material-icon' style={{ backgroundColor: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], borderRadius: '50%' }}>
+                  <ArticleIcon sx={{ fontSize: '30px', color: 'white', verticalAlign: 'middle', marginTop: '5px' }} />
+                </div>
+              </div>
+              <div className='col-8'style={{marginLeft: "40px" , paddingTop: '7px'}} >
+                <div className='h6 title-of-material' sx={{ fontSize: '24px' }}>
+                  {object.material.Title} <span className='title-of-material-of-date' sx={{ fontSize: '18px' }}>{object.createDate}</span>
+                </div>
+              </div>
+            </div>
+
+          </Button></>))}
         </>}
 
         {Material.length === 0 && <><Box sx={{ display: 'flex', marginLeft: '50%' }}>

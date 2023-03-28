@@ -19,7 +19,8 @@ import CreateClassroom from './classroom/createClassroom';
 import ViewClassroom from './classroom/viewClassroom';
 import ViewAssignment from './assignment/viewAssignment';
 import UpdateAssingment from './assignment/updateAssingment';
-import StudentUploadAssignment  from "./assignment/studentUploadAssignment"
+import StudentUploadAssignment  from "./assignment/studentUploadAssignment";
+import PageOfOneMaterial from './material/pageOfOneMaterial';
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
             <Route exact path='/material/uploadMaterial/:user_Id' element={<Material />} ></Route>
             <Route exact path='/material/viewMaterial/:user_Id' element={<ViewMaterial />} ></Route>
             <Route exact path='/material/updateMaterial/:MaterialId' element={<UpdateMaterial />} ></Route>
+            <Route exact path='/material/viewOneMaterial/:MaterialId/:Classname' element={<PageOfOneMaterial />} ></Route>
           </Route>
 
           <Route path='/assignment' >
@@ -68,7 +70,7 @@ function App() {
 
         </Routes>
 
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={1000} theme="dark" />
+        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={10000} theme="dark" />
       </div>
     </Router>
   );

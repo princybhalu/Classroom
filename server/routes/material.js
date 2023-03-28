@@ -2,6 +2,7 @@ const router = require("express").Router();
 const mongoose = require("mongoose");
 const Material = require("../models/Material");
 const upload = require("../middleware/upload");
+const User = require("../models/User");
 
 //Upload Material
 //Edit Material
@@ -67,8 +68,25 @@ router.post("/view",async(req,res)=>{
 //get one material
 router.get("/getOneMaterial/:id", async(req,res)=>{
     try{
+
         const viewOneMaterial = await Material.findById(req.params.id);
-        res.status(200).json(viewOneMaterial);
+
+        // For Date 
+        let date = viewOneMaterial.createdAt ;
+        let tempDate = date.toLocaleDateString();
+
+        // For proferser Name 
+        const proferser = await User.findById(viewOneMaterial.user_Id);
+        let proferserName = proferser.name ;
+
+
+
+        let responseBody = {
+            materialObject : viewOneMaterial ,
+            createDate: tempDate ,
+            proferserName: proferserName
+        }
+        res.status(200).json(responseBody);
     }catch(err){
         res.status(500).json(err);
     }
