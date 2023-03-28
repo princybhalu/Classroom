@@ -21,13 +21,9 @@ function ViewClassroom() {
 
   GetClassroomByClassidApiCall(class_id).then((result) => { SetClassroom(result); SetIsSetClassroom(1); }).catch((err) => { console.log(err) });
 
-
   const user = useSelector(state => state.user);
 
   GetClassroomByClassidApiCall(class_id).then((result) => { SetClassroom(result); }).catch((err) => { console.log(err) });
-
-
-
 
   return (
     <>
@@ -36,17 +32,6 @@ function ViewClassroom() {
       {OpenWhichComponent === 'Stream' && IsSetClassroom === 1 && <><Streamofclassroom classroom={Classroom} /></>}
       {OpenWhichComponent === 'Classwork' && IsSetClassroom === 1 && <>Classwork</>}
       {OpenWhichComponent === 'People' && IsSetClassroom === 1 && <>People</>}
-
-
-      <center>
-        <h2>Materials</h2>
-        <ViewMaterial class_id={class_id} />
-        <br />
-        <hr></hr>
-        <h2>Assignment</h2>
-        <ViewAssignment class_id={class_id} />
-        <hr></hr>
-      </center>
   
     </>
 

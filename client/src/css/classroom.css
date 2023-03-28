@@ -28,3 +28,17 @@
 .announce-title{
     color: black;
 }
+
+.material-icon{
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.title-of-material{
+    color: black ;
+}
+
+.title-of-material-of-date{
+    color: rgb(75, 74, 74);
+}

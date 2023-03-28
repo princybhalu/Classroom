@@ -45,7 +45,20 @@ router.put("/edit/:id",async(req,res)=>{
 router.post("/view",async(req,res)=>{
     try{
         const viewMaterial = await Material.find({Classid : req.body.Classid});
-        res.status(200).json(viewMaterial);
+        var MaterialWithDate = [] ;
+        for (let i = 0; i < viewMaterial.length; i++) {
+            let date = viewMaterial[i].createdAt ;
+            let tempDate = date.toLocaleDateString();
+            
+            let tempObject = {
+              material: viewMaterial[i],
+              createDate: tempDate
+            }
+      
+            MaterialWithDate.push(tempObject);
+      
+          }
+        res.status(200).json(MaterialWithDate);
     }catch(err){
         res.status(500).json(err);
     }
