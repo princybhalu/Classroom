@@ -19,8 +19,13 @@ import CreateClassroom from './classroom/createClassroom';
 import ViewClassroom from './classroom/viewClassroom';
 import ViewAssignment from './assignment/viewAssignment';
 import UpdateAssingment from './assignment/updateAssingment';
-import StudentUploadAssignment  from "./assignment/studentUploadAssignment"
+
 import ViewStudentUploadAssignment from "./assignment/viewStudentUploadAssignment"
+
+import StudentUploadAssignment  from "./assignment/studentUploadAssignment";
+import PageOfOneMaterial from './material/pageOfOneMaterial';
+import PageOfOneAssigment from './assignment/pageOfOneAssigment';
+
 
 function App() {
 
@@ -57,6 +62,7 @@ function App() {
             <Route exact path='/material/uploadMaterial/:user_Id' element={<Material />} ></Route>
             <Route exact path='/material/viewMaterial/:user_Id' element={<ViewMaterial />} ></Route>
             <Route exact path='/material/updateMaterial/:MaterialId' element={<UpdateMaterial />} ></Route>
+            <Route exact path='/material/viewOneMaterial/:MaterialId/:Classname' element={<PageOfOneMaterial />} ></Route>
           </Route>
 
           <Route path='/assignment' >
@@ -64,13 +70,17 @@ function App() {
             <Route exact path='/assignment/viewAssignment/:user_Id' element={<ViewAssignment />}></Route>
             <Route exact path='/assignment/updateAssignment/:AssignmentId' element={<UpdateAssingment />}></Route>
             <Route exact path='/assignment/studentUploadAssignment/:AssignmentId' element={<StudentUploadAssignment />}></Route>
+
             <Route exact path='/assignment/viewStudentUploadAssignment/:AssignmentId' element={<ViewStudentUploadAssignment />}></Route>
+
+            <Route exact path='/assignment/viewOneAssignment/:AssignmentId/:Classname' element={<PageOfOneAssigment />} ></Route>
+
           </Route>
 
 
         </Routes>
 
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={1000} theme="dark" />
+        <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={10000} theme="dark" />
       </div>
     </Router>
   );

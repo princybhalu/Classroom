@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import {
-  viewAssignmentApiCall,
-  SubmitAssignmentApiCall,
-} from "../services/assignmentApis";
+import { viewAssignmentApiCall, SubmitAssignmentApiCall } from "../services/assignmentApis";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import { Button, Grid , Box} from "@mui/material";
+import { Button, Grid, Box , Stack , Typography } from "@mui/material";
 import { DeleteAssignmentApiCall } from "../services/assignmentApis";
 import { useSelector } from "react-redux";
 import { RoleName } from "../model/RoleName";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { clearAllListeners } from "@reduxjs/toolkit";
-
+import { ImageUrlList } from '../model/imageUrlList';
+import { ThemeColorList } from '../model/themeColorList';
+import CircularProgress from '@mui/material/CircularProgress';
+import ArticleIcon from '@mui/icons-material/Article';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import '../css/classroom.css';
 
 function ViewAssignment(props) {
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [Assignment, SetAssignment] = useState([]);
-  const [assId , SetassId] = useState();
+  const [AssignmentObject, SetAssignmentObject] = useState([]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
@@ -27,145 +26,58 @@ function ViewAssignment(props) {
 
   const user = useSelector((state) => state.user);
 
-  const DeleteAssignmentCall = async (deleteAssignment) => {
-    console.log("delete Assignment");
-    console.log(deleteAssignment);
-
-    try {
-      const requestBody = {
-        user_Id: user._id,
-      };
-      console.log(requestBody);
-
-      const res = await DeleteAssignmentApiCall(deleteAssignment, requestBody);
-
-      if (res.status === 200) {
-        toast.success(res.data);
-        console.log(res.data);
-        // navigate('/classroom/viewClassroom/:class_id');
-      }
-    } catch (err) {
-      // console.log(err.res.status);
-      toast.error(err.message);
-      console.log(err.message);
-    }
-  };
-
   const requestBody = {
-    Classid: props.class_id,
+    Classid: props.classroom._id,
   };
 
-  viewAssignmentApiCall(requestBody)
-    .then((result) => {
-      SetAssignment(result);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  // console.log(Material)
 
-  // const call = async (id) => {
+  viewAssignmentApiCall(requestBody).then((result) => { if (result.length === 0) SetAssignmentObject(-1); else SetAssignmentObject(result);  }).catch((err) => { console.error(err); });
 
-  //   const RequestBody = {
-  //     // user_Id: user._id,
-  //     // Points: 0,
-  //     // Attach: urlData,
-  //     // Date: isoDate,
-  //     // Assignment : value,
-  //     Classid: props.class_id,
-  //   };
-  //   // var id = '640dd346b986bcf5889dbbf0'
-  //   console.log("hello........")
-  //   const response = await SubmitAssignmentApiCall(id,RequestBody);
-  //   console.log("hello")
-  //   console.log(response);
-
-  // }
- 
-
-  // var html = "";
-  // if (Assignment.length !== 0 && Assignment !== -1) {
-  //     for (let i = 0; i < Assignment.length; i++) {
-  //         html += ` <h5 class="card-title">${Assignment[i].Instructions}</h5>
-  //       <button onClick={ () => { call(${Assignment[i]._id}) }}>post</button>
-  //         `;
-  //     }
-  // }
+  const NevigateToViewMaterial = (id) => {
+    console.log("call in navigate");
+    navigate("/assignment/viewOneAssignment/" + id + "/" + props.classroom.Classname);
+  }
 
   return (
     <>
-      {/* <div dangerouslySetInnerHTML={createMarkup(html)} /> */}
-      {Assignment.map((assignment) => (
-    <>
-    <h3>{assignment.Title}</h3>
-    <h3>{assignment.Instructions}</h3>
-    {user.role === RoleName.STUDENT && (
-      <>
-        <Button
-          onClick={() => {
-            navigate("/assignment/studentUploadAssignment/" + assignment._id);
-          }}
-          variant="contained"
-          sx={{ marginRight: "5px" }}
-        >
-          Open
-        </Button>
-      </>
-    )}
+      {/* Classwork View */}
+      {props.viewFrom === "Classwork" && <>
+        <Box md={{ Width: '100%' }} sx={{ display: 'block', marginLeft: '5px' , marginTop: '25px' }} >
+          {AssignmentObject.length !== 0 && AssignmentObject !== -1 && <>  {AssignmentObject.map((object) => (<>
+            <div class="card" style={{ border: '0px solid' }}>
+              <Button onClick={() => { NevigateToViewMaterial(object.assignment._id); }} style={{ height: '55px' }} >
+                <div class="card-body">
+                  <div className='row'>
+                    <div className='col-1' style={{ paddingLeft: '20px' }}>
+                      <div className='material-icon' style={{ backgroundColor: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], borderRadius: '50%' }}>
+                        <AssignmentIcon sx={{ fontSize: '30px', color: 'white', verticalAlign: 'middle', marginTop: '5px' }} />
+                      </div>
+                    </div>
+                    <div className='col-11' >
+                      <Box sx={{ display: 'flex' }}>
+                        <Typography color="textPrimary" variant="h6" sx={{ fontSize: '20px' , width: '500px' }}>{object.assignment.Title}</Typography>
+                        <Stack direction="row" justifyContent="end" sx={{ marginLeft: '50%' }}>
+                          <span className='title-of-material-of-date' sx={{ fontSize: '18px', verticalAlign: 'middle' }} style={{ marginTop: '12px' }}>Posted At {object.createDate} {object.updateDate !== null && <>(Edited At {object.updateDate})</>}</span>
+                        </Stack>
+                      </Box>
+                    </div>
+                  </div>
+                </div>
+              </Button></div><hr /> </>))}
+          </>}
+        </Box>
 
-    <a href={assignment.Attach} target="_blank" rel="noopener noreferrer">
-      <img
-        src={`https://res.cloudinary.com/djj0dl6dz/image/fetch/f_auto,q_auto:good,c_limit,h_200,w_200/${assignment.Attach}#page=1`}
-        style={{ border: "1px solid black" }}
-        alt="PDF Front Page"
-      />
-    </a>
-    <br />
-    {/* <h4>{material._id}</h4> */}
-    {user.role === RoleName.PROFESSOR && (
-      <>
-        <Button
-          onClick={async () => {
-            DeleteAssignmentCall(assignment._id);
-          }}
-          variant="contained"
-          color="error"
-          sx={{ marginRight: "5px" }}
-        >
-          Delete
-        </Button>
-        <Button
-          onClick={() => {
-            navigate("/assignment/updateAssignment/" + assignment._id);
-          }}
-          variant="contained"
-          sx={{ marginRight: "5px" }}
-        >
-          Edit
-        </Button>
-        <Button
-          onClick={() => {
-            navigate("/assignment/viewStudentUploadAssignment/" + assignment._id);
-          }}
-          variant="contained"
-          sx={{ marginRight: "5px" }}
-        >
-          view student upload
-        </Button>
-      </>
-    )}
-    <br />
-    <br />
-  </>
-))}
+        {AssignmentObject.length === 0 && <><Box sx={{ display: 'flex', marginLeft: '50%' }}>
+          <CircularProgress />
+        </Box></>}
+
+        {AssignmentObject === -1 && <>Not Yet Any Assigment</>}
+
+      </>}
+
     </>
   );
 }
 
 export default ViewAssignment;
-
-// function createMarkup(html1) {
-//   return { __html: html1 };
-// }
-
 

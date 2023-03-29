@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import CampaignRoundedIcon from '@mui/icons-material/CampaignRounded';
 import UploadAssignment from '../assignment/uploadAssignment';
 import { RoleName } from '../model/RoleName';
+import ViewAssignment from '../assignment/viewAssignment';
 
 function Streamofclassroom(props) {
 
@@ -20,8 +21,6 @@ function Streamofclassroom(props) {
 
     }
 
-
-    console.log(props.classroom);
     return (
         <>
             <Box md={{ Width: '100%' }} sx={{ display: 'flex', flexGrow: 1, marginTop: '50px' }} >
@@ -55,8 +54,8 @@ function Streamofclassroom(props) {
 
                         </div>
 
-                        <div className='col-10'>
-                            {user.role === RoleName.PROFESSOR && <>   <div class="card">
+                        <div className='col-10' >
+                            {user.role === RoleName.PROFESSOR && <>   <div class="card" style={{marginBottom : '10px' }}>
                                 {
                                     openUplaodForm === 0 ? <>
                                         <Button onClick={() => SetopenUplaodForm(1)}>
@@ -88,7 +87,9 @@ function Streamofclassroom(props) {
                             </>}
 
 
-                            <ViewMaterial class_id={props.classroom._id} />
+                            <ViewMaterial classroom={props.classroom} viewFrom={"Stream"} />
+                            <br />
+                            {/* <ViewAssignment class_id={props.classroom._id} viewFrom={"Stream"} /> */}
                         </div>
 
                     </div>

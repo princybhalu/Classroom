@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RoleName } from '../model/RoleName';
 import Navbarofclassroom from '../components/navbarofclassroom';
 import Streamofclassroom from '../components/streamofclassroom';
+import Classworkofclassroom from '../components/classworkofclassroom';
 
 // 'Stream', 'Classwork', 'People' 
 
@@ -21,32 +22,16 @@ function ViewClassroom() {
 
   GetClassroomByClassidApiCall(class_id).then((result) => { SetClassroom(result); SetIsSetClassroom(1); }).catch((err) => { console.log(err) });
 
-
   const user = useSelector(state => state.user);
 
-  GetClassroomByClassidApiCall(class_id).then((result) => { SetClassroom(result); }).catch((err) => { console.log(err) });
-
-
-
-
+  
   return (
     <>
       {IsSetClassroom === 1 ? <Navbarofclassroom classroom={Classroom} activeLink={OpenWhichComponent} SetOpenWhichComponentCallBack={SetOpenWhichComponent} /> : <></>}
 
       {OpenWhichComponent === 'Stream' && IsSetClassroom === 1 && <><Streamofclassroom classroom={Classroom} /></>}
-      {OpenWhichComponent === 'Classwork' && IsSetClassroom === 1 && <>Classwork</>}
+      {OpenWhichComponent === 'Classwork' && IsSetClassroom === 1 && <><Classworkofclassroom classroom={Classroom} /></>}
       {OpenWhichComponent === 'People' && IsSetClassroom === 1 && <>People</>}
-
-
-      <center>
-        <h2>Materials</h2>
-        <ViewMaterial class_id={class_id} />
-        <br />
-        <hr></hr>
-        <h2>Assignment</h2>
-        <ViewAssignment class_id={class_id} />
-        <hr></hr>
-      </center>
   
     </>
 
