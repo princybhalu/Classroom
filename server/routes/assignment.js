@@ -31,7 +31,7 @@ router.post("/createassignment", async (req, res) => {
 });
 
 //Edit Assignment
-router.put("/editassignment/:id", async (req, res) => {
+router.post("/editassignment/:id", async (req, res) => {
     try {
         const EditAssignment = await Assignment.findById(req.params.id);
         await EditAssignment.updateOne({ $set: req.body });

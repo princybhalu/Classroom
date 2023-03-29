@@ -49,7 +49,7 @@ export default function UpdateAssingment() {
 
 //   console.log(material);
     console.log("befor one kahkj")
-    GetOneAssignmentApiCall(AssignmentId).then((result) => {SetAssignment(result); SetIsSetAssignment(1); console.log("result"); });
+    GetOneAssignmentApiCall(AssignmentId).then(async (result) => {await SetAssignment(result); SetIsSetAssignment(1); console.log("result"); });
     console.log(AssignmentId)
 
   return (
@@ -68,7 +68,7 @@ export default function UpdateAssingment() {
               <Box sx={{ my: 3 }}>
                 <Typography color="textPrimary" variant="h4" className="Header">
                   {" "}
-                  {assignment.Title}
+                  {assignment.assignmentObject.Title}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom variant="body2">
                   {" "}
@@ -78,8 +78,8 @@ export default function UpdateAssingment() {
               <Formik
                 initialValues={
                   assignment !== {} && {
-                    title: assignment.Title,
-                    instructions: assignment.Instructions,
+                    title: assignment.assignmentObject.Title,
+                    instructions: assignment.assignmentObject.Instructions,
                     // title : '',
                     // description: '',
                     Attach: ""
@@ -118,7 +118,7 @@ export default function UpdateAssingment() {
                   try {
                     console.log(file);
                     const response = await UpdateAssignmentApiCall(
-                      assignment._id,
+                      assignment.assignmentObject._id,
                       RequestBody
                     );
 
