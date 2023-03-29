@@ -46,8 +46,8 @@ function Streamofclassroom(props) {
                             {/* For Student ... this part is reaming  */}
                             {user.role === RoleName.STUDENT && <><div className="card">
                                 <div className="card-body">
-                                    <h6 className="card-text">greeting</h6>
-                                    <h4 className="card-title" style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>Hello Buddy...:</h4>
+                                    <h6 className="card-text">upcoming</h6>
+                                    <h4 className="card-title" style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>Assigments</h4>
                                 </div>
                             </div>
                             </>}

@@ -31,7 +31,7 @@ router.post("/upload", async (req, res) => {
 });
 
 //Edit Material
-router.put("/edit/:id", async (req, res) => {
+router.post("/edit/:id", async (req, res) => {
     try {
         const editMaterial = await Material.findById(req.params.id);
         await editMaterial.updateOne({ $set: req.body });

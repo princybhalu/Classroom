@@ -1,4 +1,20 @@
-import {Box,Button,Checkbox,Container,FormHelperText,Link,Grid,TextField,Typography,InputLabel,FormControl,Select,MenuItem,OutlinedInput,Modal} from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormHelperText,
+  Link,
+  Grid,
+  TextField,
+  Typography,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  OutlinedInput,
+  Modal,
+} from "@mui/material";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,16 +26,16 @@ import { UpdateMaterialApiCall } from "../services/materialApis";
 import { Formik, Form, Field } from "formik";
 
 const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '75%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    borderTop : '10px solid #000',
-    boxShadow: 24,
-    p: 4
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "75%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderTop: "10px solid #000",
+  boxShadow: 24,
+  p: 4,
 };
 
 export default function UpdateMaterial() {
@@ -29,27 +45,31 @@ export default function UpdateMaterial() {
 
   let { MaterialId } = useParams();
 
-  console.log(MaterialId);
+  // console.log(MaterialId);
 
   const navigate = useNavigate();
 
   const [material, SetMaterial] = useState({});
-  const [IsSetMaterial , SetIsSetMaterial ] = useState(0);
+  const [IsSetMaterial, SetIsSetMaterial] = useState(0);
 
   const validationSchema = Yup.object({
-    title: Yup.string().required('Title is required'),
+    title: Yup.string().required("Title is required"),
   });
 
-//   const getOneMaterial = async () => {
-//     await GetOneMaterialApiCall(MaterialId).then((result) => {
-//       SetMaterial(result);
-//     });
-//   };
-//   getOneMaterial();
+  //   const getOneMaterial = async () => {
+  //     await GetOneMaterialApiCall(MaterialId).then((result) => {
+  //       SetMaterial(result);
+  //     });
+  //   };
+  //   getOneMaterial();
 
-//   console.log(material);
-    GetOneMaterialApiCall(MaterialId).then((result) => {SetMaterial(result); SetIsSetMaterial(1); });
-    console.log(material)
+  //   console.log(material);
+  GetOneMaterialApiCall(MaterialId).then(async (result) => {
+    await SetMaterial(result);
+    // console.log(result);
+    SetIsSetMaterial(1);
+  });
+  console.log(material)
 
   return (
     <>
@@ -61,13 +81,14 @@ export default function UpdateMaterial() {
         <Box sx={style} className="popup-model">
           {/* <div>{material === {} && "Loding..."}</div> */}
 
-          {IsSetMaterial === 0 ? <>Loding...</>
-          : (
+          {IsSetMaterial === 0 ? (
+            <>Loding...</>
+          ) : (
             <>
               <Box sx={{ my: 3 }}>
                 <Typography color="textPrimary" variant="h4" className="Header">
                   {" "}
-                  {material.Title}
+                  {material.materialObject.Title}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom variant="body2">
                   {" "}
@@ -77,11 +98,11 @@ export default function UpdateMaterial() {
               <Formik
                 initialValues={
                   material !== {} && {
-                    title: material.Title,
-                    description: material.Description,
+                    title: material.materialObject.Title,
+                    description: material.materialObject.Description,
                     // title : '',
                     // description: '',
-                    Attach: ""
+                    Attach: "",
                   }
                 }
                 validationSchema={validationSchema}
@@ -117,7 +138,7 @@ export default function UpdateMaterial() {
                   try {
                     console.log(file);
                     const response = await UpdateMaterialApiCall(
-                      material._id,
+                      material.materialObject._id,
                       RequestBody
                     );
 
@@ -146,13 +167,9 @@ export default function UpdateMaterial() {
                         <Grid item xs={12} md={0}>
                           {/* Title */}
                           <TextField
-                            error={Boolean(
-                              touched.title && errors.title
-                            )}
+                            error={Boolean(touched.title && errors.title)}
                             // fullWidth
-                            helperText={
-                              touched.title && errors.title
-                            }
+                            helperText={touched.title && errors.title}
                             label="Title"
                             margin="normal"
                             name="title"
@@ -167,13 +184,11 @@ export default function UpdateMaterial() {
                           {/* Description */}
                           <TextField
                             error={Boolean(
-                              touched.description &&
-                              errors.description
+                              touched.description && errors.description
                             )}
                             fullWidth
                             helperText={
-                              touched.description &&
-                              errors.description
+                              touched.description && errors.description
                             }
                             label="Description"
                             margin="normal"
