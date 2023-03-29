@@ -38,3 +38,8 @@ export const SubmitAssignmentApiCall = async (id,rbody) => {
     const res = await axios.post('/assignment/submitassignment/' + id , rbody);
     return res;
 }
+
+export const AddMarkesApiCall = async(id , rbody) => {
+    const res = await axios.put('/assignment/addPointsInSubmission' + id , rbody);
+    return res ;
+}

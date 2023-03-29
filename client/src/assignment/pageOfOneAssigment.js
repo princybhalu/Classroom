@@ -167,11 +167,11 @@ function PageOfOneAssigment(props) {
                         </>}
 
                         {user.role === RoleName.PROFESSOR && <>
-                            <div className="card" style={{ width: '150%' }} >
+                            <div className="card" style={{ width: '120%' }} >
                                 <div className="card-body">
                                     <h5 className="card-title" style={{ color: ThemeColorList.themecolorlist[Classname.length % ImageUrlList.imageurl.length] }}>View Submission</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">Check Student Submission</h6>
-                                    {/* <ViewStudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} /> */}
+                                    <ViewStudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} />
                                 </div>
                             </div>
                         </>}

@@ -118,7 +118,7 @@ export default function StudentUploadAssignment(props) {
                     <Box sx={{ py: 2 }}>
                         {/* Submit btn */}
                         <Button color="primary" disabled={formik.isSubmitting} size="large" sx={{ marginRight: '5px' }} type="submit" variant="contained" >
-                            Post
+                            Hand In
                         </Button>
                     </Box>
 

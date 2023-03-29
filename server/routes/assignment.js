@@ -102,7 +102,7 @@ router.post("/delete/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
 
 //get one Assignment
 router.get("/getOneAssignment/:id", async (req, res) => {
@@ -125,22 +125,91 @@ router.get("/getOneAssignment/:id", async (req, res) => {
             tempDate2 = null;
         }
 
-        let GetDueDate = viewOneAssignment.DueDate ;
+        let GetDueDate = viewOneAssignment.DueDate;
         let tempDate3 = GetDueDate.toLocaleDateString();
+
+        console.log("due date");
+        console.log(GetDueDate)
+
+        let submitArray = [];
+        for (let i = 0; i < viewOneAssignment.StudentSubmition.length; i++) {
+            console.log(viewOneAssignment.StudentSubmition[i].DateWhenAssign);
+            let submitDate = viewOneAssignment.StudentSubmition[i].DateWhenAssign;
+            let temp1 = new Date(submitDate);
+
+            console.log("submitDate");
+            console.log(submitDate);
+            console.log(temp1.toLocaleDateString());
+
+
+            let SubmitStatus;
+
+            // var difference = submitDate - GetDueDate; // difference in milliseconds
+
+            // const TOTAL_MILLISECONDS_IN_A_WEEK = 1000 * 60 * 60 * 24 * 7;
+
+            // if (Math.floor(difference / TOTAL_MILLISECONDS_IN_A_WEEK) >= 0) {
+            //     SubmitStatus = "Submission On Time"
+            // }else{
+            //     SubmitStatus = "Late Submited";
+            // }
+
+            // if(new Date(GetDueDate.toLocaleDateString()).getTime() >= new Date(temp1.toLocaleDateString()).getTime() ){
+            //         SubmitStatus = "Submission On Time"
+            // }else{
+            //         SubmitStatus = "Late Submited";
+            // }
+
+            // console.log(SubmitStatus);
+
+            let tempObject = {
+                DateWhenAssign: temp1.toLocaleDateString(),
+                // SubmitStatus: SubmitStatus
+                userId: viewOneAssignment.StudentSubmition[i].userId,
+                userUserId: viewOneAssignment.StudentSubmition[i].userUserId,
+                Attach: viewOneAssignment.StudentSubmition[i].Attach,
+                Points: viewOneAssignment.StudentSubmition[i].Points,
+            }
+
+            submitArray.push(tempObject);
+
+        }
 
         let responseBody = {
             assignmentObject: viewOneAssignment,
             createDate: tempDate,
             updateDate: tempDate2,
-            proferserName: proferserName ,
-            DueDate: tempDate3
+            proferserName: proferserName,
+            DueDate: tempDate3,
+            SubmitArray: submitArray
         }
 
         res.status(200).json(responseBody);
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
+
+// req : assid , userid , points , 
+// add points in assignment 
+// router.put("/addPointsInSubmission", async (req, res) => {
+
+//     try {
+
+//         const viewOneAssignment = await Assignment.findById(req.body.Assignment_id);
+//         await viewOneAssignment.updateOne({ $set: req.body });
+
+//         let responseBody = {
+//             assignmentObject: viewOneAssignment
+//         }
+
+//         res.status(200).json(responseBody);
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+
+// });
+
 
 
 module.exports = router;
