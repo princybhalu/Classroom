@@ -22,13 +22,14 @@ function ViewAssignment(props) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
 
-  const [file, fileChange] = useState();
+  // const [file, fileChange] = useState();
 
   const user = useSelector((state) => state.user);
 
   const requestBody = {
     Classid: props.classroom._id,
   };
+
 
   viewAssignmentApiCall(requestBody).then((result) => { if (result.length === 0) SetAssignmentObject(-1); else SetAssignmentObject(result);  }).catch((err) => { console.error(err); });
 
@@ -73,6 +74,7 @@ function ViewAssignment(props) {
         {AssignmentObject === -1 && <>Not Yet Any Assigment</>}
 
       </>}
+
     </>
   );
 }
