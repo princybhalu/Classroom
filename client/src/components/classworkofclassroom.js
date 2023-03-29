@@ -6,17 +6,18 @@ import { ImageUrlList } from '../model/imageUrlList';
 import { ThemeColorList } from '../model/themeColorList';
 
 function Classworkofclassroom(props) {
+   
     return (
         <>
-            <Box md={{ Width: '100%' }} sx={{ display: 'block', marginTop: '50px' , marginLeft: '15%'}} >
+            <Box md={{ Width: '100%' }} sx={{ display: 'block', marginTop: '50px' , marginLeft: '15%' , marginRight: '15%'}} >
 
                 {/* Assigment */}
                 <div>
                     <h2 style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length] }}>Assigment</h2>
-                    <ViewAssignment class_id={props.classroom._id} viewFrom={"Classwork"} />
+                    <ViewAssignment classroom={props.classroom} viewFrom={"Classwork"} />
                 </div>
 
-                <hr style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], width: '900px', borderTop: '4px solid ' }} />
+                <hr style={{ color: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], width: '100%', borderTop: '4px solid' }} />
 
                 {/* Material */}
                 <div>

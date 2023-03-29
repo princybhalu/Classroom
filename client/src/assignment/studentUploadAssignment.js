@@ -8,9 +8,9 @@ import { useNavigate, useParams } from "react-router";
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
-export default function StudentUploadAssignment() {
+export default function StudentUploadAssignment(props) {
 
-  const {AssignmentId} = useParams();
+  const AssignmentId = props.AssignmentId;
 
   const [file, fileChange] = useState();
 
@@ -73,7 +73,7 @@ export default function StudentUploadAssignment() {
             if (response.status === 200) {
                 toast.success("Assigment Upload Successfully");
                 console.log(response.data);
-                navigate('/');
+                // navigate('/');
             }
 
         } catch (err) {
@@ -86,7 +86,7 @@ export default function StudentUploadAssignment() {
   return (
     <>
 
-        <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex', flexGrow: 1, minHeight: '100%' }} >
+        <Box md={{ Width: '100%' }} sx={{ alignItems: 'center', display: 'flex' }} >
             <Container>
 
                 {/* <form onSubmit={formik.handleSubmit} action="/uploadphoto" enctype="multipart/form-data" method="POST" > */}

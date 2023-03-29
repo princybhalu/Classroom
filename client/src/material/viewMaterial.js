@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { viewMaterialApiCall } from '../services/materialApis';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router";
-import { Button, Backdrop, Box, Modal, Fade, Typography, TextField, Card, CardContent, TableContainer, TableBody, TableHead, TableRow, Paper, Table } from '@mui/material';
+import { Button, Backdrop, Box, Modal, Fade, Typography, TextField, Card, CardContent, TableContainer, TableBody, TableHead, TableRow, Paper, Table, Stack } from '@mui/material';
 import { DeleteMatrialApiCall } from '../services/materialApis';
 import { useSelector } from 'react-redux';
 import { RoleName } from '../model/RoleName';
@@ -20,33 +20,6 @@ function ViewMaterial(props) {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
-
-  const user = useSelector(state => state.user);
-
-  const DeleteMatrialCall = async (deleteMatrial) => {
-    console.log('delete Matrial');
-    console.log(deleteMatrial)
-
-    try {
-      const requestBody = {
-        user_Id: user._id
-      }
-      console.log(requestBody);
-
-      const res = await DeleteMatrialApiCall(deleteMatrial, requestBody)
-
-      if (res.status === 200) {
-        toast.success(res.data);
-        console.log(res.data);
-        navigate('/auth/allStudents');
-      }
-    } catch (err) {
-
-      // console.log(err.res.status);
-      toast.error(err.message);
-      console.log(err.message);
-    }
-  }
 
   const requestBody = {
     Classid: props.classroom._id
@@ -75,13 +48,11 @@ function ViewMaterial(props) {
                     </div>
                   </div>
                   <div className='col-2' >
-                    <div className='row'>
-                      <div className='col h6 title-of-material' sx={{ fontSize: '24px' }}>
-                        {object.material.Title}
-                      </div>
-                      <div className='col title-of-material-of-date' sx={{ fontSize: '18px' }}>
-                        {object.createDate}
-                      </div>
+                    <div className='h6 title-of-material' sx={{ fontSize: '24px' }}>
+                      {object.material.Title}
+                    </div>
+                    <div className='title-of-material-of-date' sx={{ fontSize: '18px' }}>
+                      {object.createDate} {object.updateDate !== null && <>(Edited At {object.updateDate})</>}
                     </div>
                   </div>
                 </div>
@@ -93,44 +64,47 @@ function ViewMaterial(props) {
           <CircularProgress />
         </Box></>}
 
-        {Material !== -1 && <></>}
+        {Material === -1 && <></>}
 
       </>}
 
       {/* Classwork View */}
       {props.viewFrom === "Classwork" && <>
-        {Material.length !== 0 && Material !== -1 && <>  {Material.map((object) => (<>
-          <Button onClick={() => { NevigateToViewMaterial(object.material._id); }} >
-
-            <div className='row'>
-              <div className='col-1' style={{ paddingLeft: '20px' }}>
-                <div className='material-icon' style={{ backgroundColor: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], borderRadius: '50%' }}>
-                  <ArticleIcon sx={{ fontSize: '30px', color: 'white', verticalAlign: 'middle', marginTop: '5px' }} />
+        <Box md={{ Width: '100%' }} sx={{ display: 'block', marginLeft: '5px' }} >
+          {Material.length !== 0 && Material !== -1 && <>  {Material.map((object) => (<>
+            <div class="card" style={{border: '0px solid'}}>
+              <Button onClick={() => { NevigateToViewMaterial(object.material._id); }} style={{height: '55px'}} >
+                <div class="card-body">
+                  <div className='row'>
+                    <div className='col-1' style={{ paddingLeft: '20px' }}>
+                      <div className='material-icon' style={{ backgroundColor: ThemeColorList.themecolorlist[props.classroom.Classname.length % ImageUrlList.imageurl.length], borderRadius: '50%' }}>
+                        <ArticleIcon sx={{ fontSize: '30px', color: 'white', verticalAlign: 'middle', marginTop: '5px' }} />
+                      </div>
+                    </div>
+                    <div className='col-11' >
+                      <Box sx={{ display: 'flex' }}>
+                        <Typography color="textPrimary" variant="h6" sx={{ fontSize: '20px'  }}>{object.material.Title}</Typography>
+                        <Stack direction="row" justifyContent="end" sx={{ marginLeft: '80%' }}>
+                          <span className='title-of-material-of-date' sx={{ fontSize: '18px' , verticalAlign: 'middle' }} style={{marginTop: '12px'}}>Posted At {object.createDate} {object.updateDate !== null && <>(Edited At {object.updateDate})</>}</span>
+                        </Stack>
+                      </Box>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className='col-8'style={{marginLeft: "40px" , paddingTop: '7px'}} >
-                <div className='h6 title-of-material' sx={{ fontSize: '24px' }}>
-                  {object.material.Title} <span className='title-of-material-of-date' sx={{ fontSize: '18px' }}>{object.createDate}</span>
-                </div>
-              </div>
-            </div>
-
-          </Button></>))}
-        </>}
-
+              </Button></div><hr /> </>))}
+          </>}
+        </Box>
         {Material.length === 0 && <><Box sx={{ display: 'flex', marginLeft: '50%' }}>
           <CircularProgress />
         </Box></>}
 
-        {Material !== -1 && <></>}
+        {Material === -1 && <>Not Yet Any Material</>}
 
       </>}
 
 
 
     </>
-
-
 
   )
 }
@@ -160,3 +134,10 @@ export default ViewMaterial;
 
 //   </>
 // ))}
+
+{/* <Box sx={{ my: 3, display: 'flex' }}>
+<Typography color="textPrimary" variant="h6" sx={{ fontSize: '24px' }}>{object.material.Title}</Typography>
+<Stack direction="row" justifyContent="end" sx={{ marginLeft: '60%' }}>
+  <span className='title-of-material-of-date' sx={{ fontSize: '18px' }}>{object.createDate}</span>
+</Stack>
+</Box> */}
