@@ -3,8 +3,8 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import { GetOneAssignmentApiCall } from "../services/assignmentApis";
 
-export default function ViewStudentUploadAssignment() {
-  const { AssignmentId } = useParams();
+export default function ViewStudentUploadAssignment(props) {
+  const AssignmentId = props.AssignmentId ;
 
   const [Assignment, setAssignment] = useState({});
   const [IsSetAssignment, SetIsSetAssignment] = useState(0);

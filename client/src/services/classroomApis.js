@@ -14,3 +14,11 @@ export const GetClassroomByClassidApiCall = async (id) => {
     const res = await axios.get('/classroom/getclass/' + id);
     return res.data ;
 }
+
+export const GetAllUserByClassidApiCall = async (id) => {
+    console.log("id")
+    console.log(id)
+    const res = axios.get('/classroom/allUserOfClassroom/' + id);
+    console.log(res);
+    return res ;
+}

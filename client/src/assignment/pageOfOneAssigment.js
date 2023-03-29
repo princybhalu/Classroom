@@ -20,6 +20,7 @@ import { RoleName } from '../model/RoleName';
 import { DeleteAssignmentApiCall } from "../services/assignmentApis";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import StudentUploadAssignment from '../assignment/studentUploadAssignment';
+import ViewStudentUploadAssignment from '../assignment/viewStudentUploadAssignment';
 
 const settings = ['Update', 'Delete'];
 
@@ -159,7 +160,7 @@ function PageOfOneAssigment(props) {
                                     <h5 className="card-title" style={{ color: ThemeColorList.themecolorlist[Classname.length % ImageUrlList.imageurl.length] }}>Your Work</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">Submit Your Assigment Here</h6>
                                     <StudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} />
-                                    {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
+                                  
                                 </div>
                             </div>
 
@@ -168,10 +169,9 @@ function PageOfOneAssigment(props) {
                         {user.role === RoleName.PROFESSOR && <>
                             <div className="card" style={{ width: '150%' }} >
                                 <div className="card-body">
-                                    <h5 className="card-title" style={{ color: ThemeColorList.themecolorlist[Classname.length % ImageUrlList.imageurl.length] }}>Your Work</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">Submit Your Assigment Here</h6>
-                                    <StudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} />
-                                    {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
+                                    <h5 className="card-title" style={{ color: ThemeColorList.themecolorlist[Classname.length % ImageUrlList.imageurl.length] }}>View Submission</h5>
+                                    <h6 className="card-subtitle mb-2 text-muted">Check Student Submission</h6>
+                                    {/* <ViewStudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} /> */}
                                 </div>
                             </div>
                         </>}

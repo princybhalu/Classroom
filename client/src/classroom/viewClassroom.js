@@ -9,6 +9,7 @@ import { RoleName } from '../model/RoleName';
 import Navbarofclassroom from '../components/navbarofclassroom';
 import Streamofclassroom from '../components/streamofclassroom';
 import Classworkofclassroom from '../components/classworkofclassroom';
+import Peopleofclassroom from '../components/peopleofclassroom';
 
 // 'Stream', 'Classwork', 'People' 
 
@@ -31,7 +32,7 @@ function ViewClassroom() {
 
       {OpenWhichComponent === 'Stream' && IsSetClassroom === 1 && <><Streamofclassroom classroom={Classroom} /></>}
       {OpenWhichComponent === 'Classwork' && IsSetClassroom === 1 && <><Classworkofclassroom classroom={Classroom} /></>}
-      {OpenWhichComponent === 'People' && IsSetClassroom === 1 && <>People</>}
+      {OpenWhichComponent === 'People' && IsSetClassroom === 1 && <><Peopleofclassroom classroom={Classroom}  /></>}
   
     </>
 
