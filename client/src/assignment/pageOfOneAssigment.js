@@ -33,6 +33,7 @@ function PageOfOneAssigment(props) {
     }
 
     const [Assignment, SetAssignment] = useState();
+    // console.log(Assignment);
     const [IsSetAssignment, SetIsSetAssignment] = useState(0);
 
     const user = useSelector(state => state.user);
@@ -41,7 +42,7 @@ function PageOfOneAssigment(props) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
 
-    GetOneAssignmentApiCall(AssignmentId).then((result) => { SetAssignment(result); SetIsSetAssignment(1); }).catch((err) => { console.log(err) });
+   GetOneAssignmentApiCall(AssignmentId).then((result) => { SetAssignment(result); SetIsSetAssignment(1); }).catch((err) => { console.log(err) });
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -160,7 +161,6 @@ function PageOfOneAssigment(props) {
                                     <h5 className="card-title" style={{ color: ThemeColorList.themecolorlist[Classname.length % ImageUrlList.imageurl.length] }}>Your Work</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">Submit Your Assigment Here</h6>
                                     <StudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} />
-                                  
                                 </div>
                             </div>
 
@@ -171,7 +171,7 @@ function PageOfOneAssigment(props) {
                                 <div className="card-body">
                                     <h5 className="card-title" style={{ color: ThemeColorList.themecolorlist[Classname.length % ImageUrlList.imageurl.length] }}>View Submission</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">Check Student Submission</h6>
-                                    <ViewStudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} />
+                                    <ViewStudentUploadAssignment AssignmentId={Assignment.assignmentObject._id} Assignment={Assignment} classname={Classname}/>
                                 </div>
                             </div>
                         </>}

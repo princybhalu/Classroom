@@ -192,23 +192,20 @@ router.get("/getOneAssignment/:id", async (req, res) => {
 
 // req : assid , userid , points , 
 // add points in assignment 
-// router.put("/addPointsInSubmission", async (req, res) => {
+router.put("/addPointsInSubmission", async (req, res) => {
 
-//     try {
+    try {
+        const result = await Assignment.updateOne({ _id: req.body.Assignment_id, "StudentSubmition.userId": req.body.user_id }, { $set: { "StudentSubmition.$.Points": req.body.Points } });
+        console.log(result);
+        const viewOneAssignment = await Assignment.findById(req.body.Assignment_id);
+        
+        res.status(200).json(viewOneAssignment);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 
-//         const viewOneAssignment = await Assignment.findById(req.body.Assignment_id);
-//         await viewOneAssignment.updateOne({ $set: req.body });
-
-//         let responseBody = {
-//             assignmentObject: viewOneAssignment
-//         }
-
-//         res.status(200).json(responseBody);
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-
-// });
+});
 
 
 
