@@ -1,4 +1,4 @@
-User registration and management done by admin.
+User registration and management done by admin. <br/>
 Professor can manage material and assignments.
 Students  can view material and assignments.
 Students can submit respective assignments.
