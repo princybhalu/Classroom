@@ -74,6 +74,9 @@ function App() {
             <Route exact path='/assignment/viewStudentUploadAssignment/:AssignmentId' element={<ViewStudentUploadAssignment />}></Route>
 
             <Route exact path='/assignment/viewOneAssignment/:AssignmentId/:Classname' element={<PageOfOneAssigment />} ></Route>
+            <Route exact path='/assignment/viewAssignment/:user_Id' element={<ViewAssignment />}></Route>
+
+
 
           </Route>
 
