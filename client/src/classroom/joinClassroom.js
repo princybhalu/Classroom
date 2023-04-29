@@ -77,7 +77,7 @@ function JoinClassroom() {
             <Box sx={{ my: 3 , marginLeft: '35%' }}>
                 <Typography color="textPrimary" variant="body" > To sign in with a class code </Typography>
                 <ul>
-                    <li>Use an authorised account</li>
+                    <li>Use an authorized account</li>
                     <li>Use a class code with 5-7 letters or numbers, and no spaces or symbols</li>
                 </ul>
                 {/* <Typography color="textPrimary" variant="body2" > Ask your teacher for the class code, then enter it here. </Typography> */}
