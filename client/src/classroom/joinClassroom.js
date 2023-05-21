@@ -36,12 +36,16 @@ function JoinClassroom() {
 
         try{
             const res = await JoinClassroomApiCall(requestBody);
+            console.log(res.status);
             if(res.status === 200){
-                toast.success("Join Classroom Successfullly");
+                toast.success("Classroom Joined Successfullly");
                 navigate("/");
             }
+            if(res.status == 500){
+                toast.error("Please Enter Valid Classcode");
+            }
         }catch(err){
-            toast.error(err.message);
+            toast.error("Please Enter Valid Classcode");
             console.log(err);
         }
 
