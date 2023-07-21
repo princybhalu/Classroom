@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Container, FormHelperText, Link, Grid, TextField, Typography, InputLabel, FormControl, Select, MenuItem, FormLabel , RadioGroup , FormControlLabel , Radio  } from '@mui/material';
+import { Box, Button, Container, FormHelperText, Grid, TextField, InputLabel, FormControl, Select, MenuItem, FormLabel , RadioGroup , FormControlLabel , Radio  } from '@mui/material';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -88,7 +88,10 @@ function Registration() {
                 if (response.status === 200) {
                     toast.success("Registered Successfully");
                     console.log(response.data);
-                    navigate('/');
+                    if(response.data.role === "Student")
+                        navigate('/auth/allStudents');
+                    if(response.data.role === "Professor")
+                        navigate('/auth/allProfessors');
                 }
 
             } catch (err) {

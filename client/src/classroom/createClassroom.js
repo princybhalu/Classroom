@@ -33,7 +33,7 @@ function CreateClassroom() {
 
         // To check enter value is vaild or not 
         validationSchema: Yup.object({
-            Sem: Yup.number().max(9).min(1).required('Sem is required'),
+            Sem: Yup.number().max(9).min(0).required('Sem is required'),
             Batch: Yup.string().required("Batch is required"),
             Subject: Yup.string().required("Subject is required"),
             Department: Yup.string().required("Department is required"),
